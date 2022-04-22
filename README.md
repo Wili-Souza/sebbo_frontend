@@ -1,5 +1,7 @@
 # SebboFrontend
 
+Sebbo is a website for buying second hand books. A project for didatic purposes.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.16.
 
 ## Development server
