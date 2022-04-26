@@ -3,6 +3,7 @@
         <h4 class="section-title">{{ section.title }}</h4>
         <ul>
             <li *ngFor="let item of section.items">
+                <fa-icon class="icon" [icon]="icons[item.icon]"></fa-icon>
                 <a [href]="item.url">{{ item.value }}</a>
             </li>
         </ul>
