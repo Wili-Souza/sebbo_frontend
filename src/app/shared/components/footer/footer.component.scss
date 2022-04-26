@@ -1,0 +1,35 @@
+.footer {
+    position: relative;
+    width: 100%;
+    padding: 3% 6%;
+    background-color: var(--base);
+    box-sizing: border-box;
+    color: var(--light-background);
+    font-size: 1.1rem;
+    font-weight: 100;
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+
+    .section {
+        a {
+            color: var(--light-background);
+            text-decoration: none;
+        }
+    }
+
+    .section-title {
+        font-size: 1.2rem;
+        font-weight: 300;
+    }
+
+    .logo {
+        cursor: pointer;
+        position: absolute;
+        right: 2rem;
+        top: 1rem;
+        font-family: 'Orelega One', cursive;
+        font-size: 1.6rem;
+        color: var(--light-background);
+    }
+} 

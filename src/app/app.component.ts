@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { footerSections } from 'src/assets/data/footer-sections';
+import { FooterSection } from './shared/models/footer-section';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'sebbo-frontend';
+  footerSections: FooterSection[] = footerSections;
 }

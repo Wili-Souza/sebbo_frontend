@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 
 @NgModule({
   declarations: [
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,
@@ -17,6 +19,7 @@ import { RouterModule } from '@angular/router';
   exports: [
     HeaderComponent,
     FontAwesomeModule,
+    FooterComponent,
   ]
 })
 export class SharedModule { }

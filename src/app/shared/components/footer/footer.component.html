@@ -1,0 +1,11 @@
+<div class="footer">
+    <div *ngFor="let section of sections" class="section">
+        <h4 class="section-title">{{ section.title }}</h4>
+        <ul>
+            <li *ngFor="let item of section.items">
+                <a [href]="item.url">{{ item.value }}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="logo" (click)="scrollToTop()">Sebbo</div>
+</div>
