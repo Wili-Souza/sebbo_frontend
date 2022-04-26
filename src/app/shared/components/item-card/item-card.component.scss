@@ -1,15 +1,25 @@
 .item-card {
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     border: 3px;
     overflow: hidden;
-    height: fit-content;
+    height: 100%;
     align-items: flex-end;
     box-shadow: 1px 1px 3px var(--shadow);
 
     div {
+        width: 100%;
         flex: 1;
+    }
+
+    .picture, .info .title {
+        transition: .3s all;
+        cursor: pointer;
+
+        &:hover {
+            opacity: .7;
+        }
     }
 
     .picture {
@@ -27,8 +37,8 @@
     }
 
     .info {
+        box-sizing: border-box;
         padding: 10px;
-        height: 100%;
 
         .title, p {
             margin: 0;
@@ -52,6 +62,7 @@
         padding: 10px 2rem;
         transition: .3s all;
         cursor: pointer;
+        margin-top: 1rem;
 
         &:hover {
             background-color: var(--base);
