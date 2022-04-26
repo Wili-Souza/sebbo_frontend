@@ -1,0 +1,47 @@
+.home {
+    width: 100%;
+    // global
+}
+
+.presentation-area {
+    position: relative;
+    width: 100%;
+    height: 35vw;
+    background-color: var(--base);
+
+    .background-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: .3;
+        // filter: blur(0.7px) hue-rotate(176deg) invert(0.24) saturate(1.3);
+        filter: blur(0.7px) hue-rotate(176deg) invert(0.24) saturate(1.3) brightness(0.7) contrast(1.5);
+    }
+
+    .square-frame {
+        display: flex;
+        box-sizing: border-box;
+        padding: 2rem;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 70%;
+        height: 80%;
+        border-radius: 2px;
+        border: 4px solid var(--light-background);
+
+        h2 {
+            margin: 0;
+            align-self: flex-end;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            color: var(--light-background);
+            font-weight: 300;
+        }
+    }
+}
+
+.content {
+    padding: 3rem;
+} 
