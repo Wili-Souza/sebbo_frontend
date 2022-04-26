@@ -1,0 +1,52 @@
+$padding-inline: 1rem;
+
+.header {
+    position: relative;
+    height: 2.5rem;
+    padding: $padding-inline;
+    display: flex;
+    align-items: center;
+
+    .tag {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 1rem;
+        background-color: var(--base);
+    }
+
+    .logo {
+        cursor: pointer;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        font-weight: 400;
+        font-family: 'Orelega One', cursive;
+        font-size: 2rem;
+        color: var(--base);
+    }
+    
+
+    .items {
+        position: relative;
+        left: 100%;
+        transform: translateX(calc(-150% - 1rem));
+        display: flex;
+
+        .circle {
+            margin: 5px;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--base);
+            border-radius: 100%;
+        }
+    
+        div {
+            flex: 1;
+        }
+    }
+}

@@ -1,1 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Akshar:wght@300;400;500;600;700&family=Orelega+One&display=swap');
+
+body, html {
+    margin: 0;
+    background-color: var(--light-background);
+}
+
+a {
+    color: var(--base);
+    transition: .4s all;
+
+    &:hover {
+        opacity: .7;
+    }
+
+    &:active {
+        opacity: 1;
+    }
+}
+
+* {
+    font-family: 'Akshar', sans-serif;
+}
+
+:root {
+    --base: #143A51;
+    --light-background: #FFFFFF;
+}
