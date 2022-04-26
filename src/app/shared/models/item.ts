@@ -1,7 +1,9 @@
 export interface Item {
     imageUrl: string;
-    id: string;
     name: string;
-    description: string;
     price: number;
+    id: string;
+    description: string;
+    author: string;
+    stock: number;
 } 

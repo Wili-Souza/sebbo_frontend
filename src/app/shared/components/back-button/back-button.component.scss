@@ -1,0 +1,14 @@
+.goBack {
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin: 10px;
+    transition: .2s all;
+
+    fa-icon {
+        margin-right: 1rem;
+    }
+
+    &:hover {
+        opacity: .5;
+    }
+} 

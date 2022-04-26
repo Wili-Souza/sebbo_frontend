@@ -6,11 +6,9 @@
         </div>
     </div>
 
-    <div class="title-container">
-        <hr><h2 class="title">Livros Disponíveis</h2><hr>
-    </div>
+    <app-section-title title="Livros Disponíveis"></app-section-title>
 
-    <div class="content">
+    <div class="content section">
         <div *ngFor="let item of items" class="item-container">
             <app-item-card
                 [item]="item">
