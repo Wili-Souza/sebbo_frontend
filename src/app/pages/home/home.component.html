@@ -7,6 +7,10 @@
     </div>
 
     <div class="content">
-        Nice content
+        <div *ngFor="let item of items" class="item-container">
+            <app-item-card
+                [item]="item">
+            </app-item-card>
+        </div>
     </div>
 </div>

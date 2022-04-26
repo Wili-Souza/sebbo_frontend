@@ -4,6 +4,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from './components/footer/footer.component';
+import { ItemCardComponent } from './components/item-card/item-card.component';
 
 
 
@@ -11,6 +12,7 @@ import { FooterComponent } from './components/footer/footer.component';
   declarations: [
     HeaderComponent,
     FooterComponent,
+    ItemCardComponent,
   ],
   imports: [
     CommonModule,
@@ -20,6 +22,7 @@ import { FooterComponent } from './components/footer/footer.component';
     HeaderComponent,
     FontAwesomeModule,
     FooterComponent,
+    ItemCardComponent,
   ]
 })
 export class SharedModule { }

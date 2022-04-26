@@ -21,9 +21,12 @@ a {
 
 * {
     font-family: 'Akshar', sans-serif;
+    color: var(--base);
 }
 
 :root {
     --base: #143A51;
     --light-background: #FFFFFF;
+    --image-background: #F8F8F8;
+    --shadow: #143a5151;
 }

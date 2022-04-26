@@ -44,4 +44,12 @@
 
 .content {
     padding: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+
+    .item-container {
+        box-sizing: border-box;
+        width: 20%;
+        padding: 10px;
+    }
 } 

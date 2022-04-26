@@ -1,0 +1,10 @@
+<div class="item-card">
+    <div class="picture">
+        <img [src]="item.imageUrl" alt="">
+    </div>
+    <div class="info">
+        <h4 class="title">{{ item.name }}</h4>
+        <p class="price">{{ item.price | currency:'BRL'}}</p>
+        <button class="btn" (click)="onShowDetails(item)">Exibir</button>
+    </div>
+</div>

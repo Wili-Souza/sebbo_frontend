@@ -1,3 +1,7 @@
+* {
+    color: var(--light-background);
+}
+
 .footer {
     position: relative;
     width: 100%;
@@ -13,7 +17,6 @@
 
     .section {
         a {
-            color: var(--light-background);
             text-decoration: none;
         }
     }
@@ -30,6 +33,5 @@
         top: 1rem;
         font-family: 'Orelega One', cursive;
         font-size: 1.6rem;
-        color: var(--light-background);
     }
 } 
