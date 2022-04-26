@@ -1,0 +1,17 @@
+.title-container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
+
+    hr {
+        border-style: none;
+        border-top: 2px solid var(--base);
+        height: 0;
+        flex: 1;
+
+        &:last-child {
+            flex: 4;
+        }
+    }
+} 
