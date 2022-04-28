@@ -25,7 +25,7 @@ export class ItemDetailComponent implements OnInit {
       name: "Livro 1",
       author: "José",
       stock: 2,
-      description: "",
+      sinopse: "",
       price: 19.9,
       imageUrl: "https://ludis.com.br/wp-content/uploads/2020/05/book-img2.jpg"
     }
