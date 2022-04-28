@@ -1,0 +1,40 @@
+<app-section-title *ngIf="item" [title]="item.name"></app-section-title>
+
+<div class="section">
+    <ng-container *ngIf="item; else elseTemplate">
+        <app-back-button (goBack)="goback()"></app-back-button>
+        <div class="info">
+            <div class="picture">
+                <img [src]="item.imageUrl" alt="">
+            </div>
+            <div class="data">
+                <div>
+                    <span class="label">Título</span>
+                    <p class="value">{{ item.name }}</p>
+
+                    <span class="label">Autor</span>
+                    <p class="value">{{ item.author }}</p>
+
+                    <span class="label">Sinopse</span>
+                    <p class="value">{{ item.description || "Indisponível" }}</p>
+
+                    <span class="label">Preço</span>
+                    <p class="price">{{ item.price | currency:"BRL"}}</p>
+                </div>
+                <ng-container *ngIf="item.stock > 0; else elseTemplate">
+                    <button class="btn-buy active">Adicionar ao carrinho</button>
+                </ng-container>
+                <ng-template #elseTemplate>
+                    <button class="btn-buy">Livro indisponível! :(</button>
+                </ng-template>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-template #elseTemplate>
+        <div class="error-message">
+            Livro não encontrado
+        </div>
+    </ng-template>
+
+</div>

@@ -11,7 +11,8 @@
     <div class="content section">
         <div *ngFor="let item of items" class="item-container">
             <app-item-card
-                [item]="item">
+                [item]="item"
+                (showDetails)="goToItemDetails(item)">
             </app-item-card>
         </div>
     </div>
