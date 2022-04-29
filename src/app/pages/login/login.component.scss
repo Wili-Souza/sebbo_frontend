@@ -29,6 +29,10 @@
     flex-direction: column;
     justify-content: stretch;
 
+    .field-container {
+        margin-bottom: 1.5rem;
+    }
+
     label:after {
         content: ":";
     }
@@ -43,12 +47,20 @@
         font-size: 1.2rem;
         width: 100%;
         color: #666;
-        margin-bottom: 1.5rem;
 
         &:focus {
             outline: none;
             border-color: #aaa;
         }
+
+        &.invalid {
+            background-color: #ffeaee;
+            border-color: rgb(239, 194, 194);
+        }
+    }
+
+    .error-message {
+        color: rgb(254, 128, 128);
     }
 
     .register-link {

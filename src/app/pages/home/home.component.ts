@@ -27,11 +27,11 @@ export class HomeComponent implements OnInit {
   }
 
   goToItemDetails(item: Item): void {
-    this.router.navigate(['item/' + item.id])
+    this.router.navigate(['item/' + item.id]);
   }
 
   buyItem(item: Item) {
     // TODO: implement cart functionality
-    // this.router.navigate(['cart'])
+    this.router.navigate(['cart']);
   }
 }

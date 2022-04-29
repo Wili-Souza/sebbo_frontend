@@ -9,23 +9,26 @@
         <form [formGroup]="loginForm" (ngSubmit)="login()" class="form">
             <app-section-title title="Insira seus dados:"></app-section-title>
 
-            <!-- <label for="name" class="label">Nome</label>
-            <input id="name" type="text" class="value" formControlName="name" /> -->
+            <div class="field-container">
+                <label for="email" class="label">Email</label>
+                <input id="email" type="text" formControlName="email"
+                    [class.invalid]="c('email')?.invalid && (c('email')?.touched || showErrorMessages)"/>
+                <div  *ngIf="c('email')?.errors?.required && showErrorMessages" class="error-message">
+                    Este campo é obrigatório!
+                </div>
+            </div>
 
-            <label for="email" class="label">Email</label>
-            <input id="email" type="text" class="value" formControlName="email"/>
-
-            <!-- <label for="phone" class="label">Telefone</label>
-            <input id="phone" type="text" class="value" formControlName="phone" /> -->
-
-            <label for="password" class="label">Senha</label>
-            <input id="password" type="text" class="price" formControlName="password"/>
-
-            <!-- <label for="confirmPassword" class="label">Confirme sua senha</label>
-            <input id="confirmPassword" type="text" class="price" formControlName="confirmPassword"/> -->
+            <div class="field-container">
+                <label for="password" class="label">Senha</label>
+                <input id="password" type="text" formControlName="password"
+                    [class.invalid]="c('password')?.invalid && (c('password')?.touched || showErrorMessages)"/>
+                <div  *ngIf="c('password')?.errors?.required && showErrorMessages" class="error-message">
+                    Este campo é obrigatório!
+                </div>
+            </div>
             
             <button type="submit" class="btn center">Entrar</button>
-            <a class="register-link center" routerLink="/home">Não possui uma conta? cadastre-se!</a>
+            <!-- <a class="register-link center" routerLink="/home">Não possui uma conta? cadastre-se!</a> -->
         </form>
     </div>
 </div>
