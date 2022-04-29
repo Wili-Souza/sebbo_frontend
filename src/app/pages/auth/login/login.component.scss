@@ -67,6 +67,10 @@
         }
     }
 
+    ::-webkit-input-placeholder {
+        color: rgb(172, 172, 172);
+    }
+
     .center {
         width: fit-content;
         position: relative;

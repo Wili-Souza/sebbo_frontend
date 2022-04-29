@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   {
     path: "cart",
-    redirectTo: "auth"
+    redirectTo: "auth/login"
   },
   {
     path: "**",

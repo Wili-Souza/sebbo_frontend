@@ -3,16 +3,19 @@
 
     <div class="field-container">
         <label for="email" class="label">Email</label>
-        <input id="email" type="text" formControlName="email"
+        <input id="email" type="text" formControlName="email" placeholder="exemplo@email.com"
             [class.invalid]="c('email')?.invalid && (c('email')?.touched || showErrorMessages)"/>
         <div  *ngIf="c('email')?.errors?.required && showErrorMessages" class="error-message">
             Este campo é obrigatório!
+        </div>
+        <div  *ngIf="c('email')?.errors?.email && showErrorMessages" class="error-message">
+            Email invalido.
         </div>
     </div>
 
     <div class="field-container">
         <label for="password" class="label">Senha</label>
-        <input id="password" type="text" formControlName="password"
+        <input id="password" type="password" formControlName="password" placeholder="Insira sua senha"
             [class.invalid]="c('password')?.invalid && (c('password')?.touched || showErrorMessages)"/>
         <div  *ngIf="c('password')?.errors?.required && showErrorMessages" class="error-message">
             Este campo é obrigatório!
