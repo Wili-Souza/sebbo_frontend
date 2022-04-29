@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -15,25 +14,11 @@ export class LoginComponent implements OnInit {
     password: ["", Validators.required],
   });
 
-  // loginForm = this.fb.group({
-  //   name: ["", Validators.required],
-  //   email: ["", Validators.required],
-  //   phone: ["", Validators.required],
-  //   password: ["", Validators.required],
-  //   confirmPassword: ["", Validators.required]
-  // });
-
   constructor(
-    private router: Router,
     private fb: FormBuilder
   ) { }
 
-  ngOnInit(): void {
-  }
-
-  goBack(): void {
-    this.router.navigate(["home"]);
-  }
+  ngOnInit(): void {}
 
   login(): void {
     if ( this.loginForm.valid ) {
@@ -41,14 +26,12 @@ export class LoginComponent implements OnInit {
       // TODO: integrate with login route
       const data = this.loginForm.value;
       console.log(data);
-      
     } else {
       this.showErrorMessages = true;
     }
   }
 
   c(controlName: string): AbstractControl {
-    return this.loginForm.controls[controlName];
+    return this.loginForm?.controls[controlName];
   }
-
 }

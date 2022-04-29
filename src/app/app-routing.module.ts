@@ -16,12 +16,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/item-detail/item-detail.module').then(m => m.ItemDetailModule),
   },
   {
-    path: "login",
-    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule),
+    path: "auth",
+    loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule),
   },
   {
     path: "cart",
-    redirectTo: "login"
+    redirectTo: "auth"
   },
   {
     path: "**",

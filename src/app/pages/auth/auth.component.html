@@ -1,0 +1,16 @@
+<app-section-title title="Entre com sua conta"></app-section-title>
+
+<div class="section">
+    <app-back-button (goBack)="goBack()"></app-back-button>
+    <div class="form-container">
+        <div class="picture">
+            <img src="/assets/images/library.png" alt="">
+        </div>
+        <div class="form-wrapper">
+            <app-section-title title="Insira seus dados:"></app-section-title>
+            <div class="form">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>
