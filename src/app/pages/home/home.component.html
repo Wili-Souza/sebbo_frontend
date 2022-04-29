@@ -12,7 +12,8 @@
         <div *ngFor="let item of items" class="item-container">
             <app-item-card
                 [item]="item"
-                (showDetails)="goToItemDetails(item)">
+                (showDetails)="goToItemDetails(item)"
+                (buy)="buyItem(item)">
             </app-item-card>
         </div>
     </div>

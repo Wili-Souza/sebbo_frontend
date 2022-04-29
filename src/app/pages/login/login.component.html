@@ -1,0 +1,31 @@
+<app-section-title title="Entre com sua conta"></app-section-title>
+
+<div class="section">
+    <app-back-button (goBack)="goBack()"></app-back-button>
+    <div class="form-container">
+        <div class="picture">
+            <img src="/assets/images/library.png" alt="">
+        </div>
+        <form [formGroup]="loginForm" (ngSubmit)="login()" class="form">
+            <app-section-title title="Insira seus dados:"></app-section-title>
+
+            <!-- <label for="name" class="label">Nome</label>
+            <input id="name" type="text" class="value" formControlName="name" /> -->
+
+            <label for="email" class="label">Email</label>
+            <input id="email" type="text" class="value" formControlName="email"/>
+
+            <!-- <label for="phone" class="label">Telefone</label>
+            <input id="phone" type="text" class="value" formControlName="phone" /> -->
+
+            <label for="password" class="label">Senha</label>
+            <input id="password" type="text" class="price" formControlName="password"/>
+
+            <!-- <label for="confirmPassword" class="label">Confirme sua senha</label>
+            <input id="confirmPassword" type="text" class="price" formControlName="confirmPassword"/> -->
+            
+            <button type="submit" class="btn center">Entrar</button>
+            <a class="register-link center" routerLink="/home">Não possui uma conta? cadastre-se!</a>
+        </form>
+    </div>
+</div>
