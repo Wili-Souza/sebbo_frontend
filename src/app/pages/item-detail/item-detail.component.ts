@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BookService } from 'src/app/core/services/book.service';
 import { Item } from 'src/app/shared/models/item';
 
 @Component({
@@ -11,7 +12,9 @@ export class ItemDetailComponent implements OnInit {
   item?: Item;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private bookService: BookService,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -20,15 +23,19 @@ export class ItemDetailComponent implements OnInit {
 
   private fetchItemData(): void {
     //TODO: get book as Item from backend
-    this.item = {
-      id: "1",
-      name: "Livro 1",
-      author: "José",
-      stock: 2,
-      sinopse: "",
-      price: 19.9,
-      imageUrl: "https://ludis.com.br/wp-content/uploads/2020/05/book-img2.jpg"
-    }
+    let id = "";
+    this.activatedRoute.paramMap.subscribe(params => {
+      const id = params.get("id")
+      if ( id ) {
+        this.getById(id);
+      } 
+    });
+  }
+
+  getById(id: string): void  {
+    this.bookService.getById(id).subscribe( item => {
+      this.item = item;
+    }, error => console.log(error));
   }
 
   addToCart() {

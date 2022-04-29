@@ -6,6 +6,9 @@ import { environment } from 'src/environments/environment';
 
 import { Item } from 'src/app/shared/models/item';
 
+
+const mockCoverUrl = "https://ludis.com.br/wp-content/uploads/2020/05/book-img2.jpg";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +21,14 @@ export class BookService {
 
   getAll(): Observable<Item[]> {
     return this.http.get<Item[]>(this.URL).pipe(
-      map(items => items.map(item => ({ ...item, imageUrl: "https://ludis.com.br/wp-content/uploads/2020/05/book-img2.jpg" })))
+      map(items => items.map(item => ({ ...item, imageUrl: mockCoverUrl })))
+    );
+  }
+
+  getById(id: string): Observable<Item> {
+    const getBookUrl = this.URL + "livro/" + id;
+    return this.http.get<Item>(getBookUrl).pipe(
+      map(item => ({ ...item, imageUrl: mockCoverUrl }))
     );
   }
 }
