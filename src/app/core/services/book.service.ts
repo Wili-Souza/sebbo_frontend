@@ -13,7 +13,7 @@ const mockCoverUrl = "https://ludis.com.br/wp-content/uploads/2020/05/book-img2.
   providedIn: 'root'
 })
 export class BookService {
-  private URL = environment.apiUrl;
+  private URL = environment.apiUrl + "livro/";
 
   constructor(
     private http: HttpClient
@@ -26,7 +26,7 @@ export class BookService {
   }
 
   getById(id: string): Observable<Item> {
-    const getBookUrl = this.URL + "livro/" + id;
+    const getBookUrl = this.URL + id;
     return this.http.get<Item>(getBookUrl).pipe(
       map(item => ({ ...item, imageUrl: mockCoverUrl }))
     );

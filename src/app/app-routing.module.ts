@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { UserAuthenticationGuard } from './core/guards/user-authentication.guard';
+import { ItemDetailComponent } from './pages/item-detail/item-detail.component';
 
 const routes: Routes = [
   {
@@ -9,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: "home",
-    loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule),
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)
   },
   {
     path: "item/:id",
@@ -21,7 +23,13 @@ const routes: Routes = [
   },
   {
     path: "cart",
-    redirectTo: "auth/login"
+    component: ItemDetailComponent,
+    canActivate: [UserAuthenticationGuard]
+  },
+  {
+    path: "user",
+    component: ItemDetailComponent,
+    canActivate: [UserAuthenticationGuard]
   },
   {
     path: "**",

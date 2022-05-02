@@ -6,6 +6,7 @@ $padding-inline: 1rem;
     padding: $padding-inline;
     display: flex;
     align-items: center;
+    overflow: hidden;
 
     .tag {
         position: absolute;
@@ -18,9 +19,10 @@ $padding-inline: 1rem;
 
     .logo {
         cursor: pointer;
-        position: relative;
+        position: absolute;
+        top: 50%;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translate(-50%, -50%);
         font-weight: 400;
         font-family: 'Orelega One', cursive;
         font-size: 2rem;
@@ -29,9 +31,8 @@ $padding-inline: 1rem;
     
 
     .items {
-        position: relative;
-        left: 100%;
-        transform: translateX(calc(-150% - 1rem));
+        position: absolute;
+        right: 1rem;
         display: flex;
 
         .circle {
