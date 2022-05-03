@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { BookService } from 'src/app/core/services/book.service';
 import { Item } from 'src/app/shared/models/item';
 
@@ -14,7 +15,8 @@ export class ItemDetailComponent implements OnInit {
   constructor(
     private router: Router,
     private bookService: BookService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -40,7 +42,11 @@ export class ItemDetailComponent implements OnInit {
 
   addToCart() {
     // TODO: adicionar item ao carrinho 
-    this.sendEmail(this.item);
+    if ( this.authService.isLoggedIn() ) {
+      this.sendEmail(this.item);
+    } else {
+      this.router.navigate(["/auth/login"])
+    }
   }
 
   sendEmail(item?: Item) {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { BookService } from 'src/app/core/services/book.service';
 import { Item } from 'src/app/shared/models/item';
 
@@ -13,7 +14,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private bookService: BookService
+    private bookService: BookService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -35,7 +37,11 @@ export class HomeComponent implements OnInit {
 
     // temporario:
     if ( item.stock > 0 ) {
-      this.sendEmail(item);
+      if ( this.authService.isLoggedIn() ) {
+        this.sendEmail(item);
+      } else {
+        this.router.navigate(["/auth/login"])
+      }
     } else {
       alert("Os estoques para esse produto acabaram!")
     }
