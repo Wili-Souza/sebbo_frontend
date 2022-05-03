@@ -22,7 +22,7 @@
                     <p class="price">{{ item.price | currency:"BRL"}}</p>
                 </div>
                 <ng-container *ngIf="item.stock > 0; else elseTemplate">
-                    <button class="btn-buy active">Adicionar ao carrinho</button>
+                    <button (click)="addToCart()" class="btn-buy active">Adicionar ao carrinho</button>
                 </ng-container>
                 <ng-template #elseTemplate>
                     <button class="btn-buy">Livro indisponível! :(</button>

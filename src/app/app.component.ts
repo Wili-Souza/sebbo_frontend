@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { footerSections } from 'src/assets/data/footer-sections';
 import { AuthService } from './core/services/auth.service';
 import { SessionService } from './core/services/session.service';
-import { UserService } from './core/services/user.service';
 import { FooterSection } from './shared/models/footer-section';
 import { User } from './shared/models/user';
 
@@ -18,7 +17,6 @@ export class AppComponent {
   constructor(
     private authService: AuthService,
     private sessionService: SessionService,
-    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -36,6 +34,8 @@ export class AppComponent {
       this.isUserLogged = true;
     } else if ( this.authService.isLoggedIn() ) {
       this.authService.getUserByToken().subscribe();
+    } else {
+      this.isUserLogged = false;
     }
   }
 

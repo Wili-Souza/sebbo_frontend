@@ -39,7 +39,6 @@ export class AuthService {
     );
   }
 
-
   getByToken(jwtToken: string): Observable<User> {
     const loginUrl = this.URL;
     return this.http.get<User>(loginUrl);

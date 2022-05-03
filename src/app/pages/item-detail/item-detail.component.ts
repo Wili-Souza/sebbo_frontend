@@ -40,6 +40,15 @@ export class ItemDetailComponent implements OnInit {
 
   addToCart() {
     // TODO: adicionar item ao carrinho 
+    this.sendEmail(this.item);
+  }
+
+  sendEmail(item?: Item) {
+    const sebboEmail = "user@example.com";
+    const subject = "[COMPRA]"
+    const message = `Olá,%0D%0 %0D%0AAgostaria de comprar o livro ${ item?.name }, de codigo ${ item?.id }.%0D%0A %0D%0AEntre em contato comigo!`
+      .replace(" ", "%20");
+    window.location.href = `mailto:${sebboEmail}?subject=${subject}&body=${message}`;
   }
 
   goback(): void {

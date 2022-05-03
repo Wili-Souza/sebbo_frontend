@@ -32,6 +32,23 @@ export class HomeComponent implements OnInit {
 
   buyItem(item: Item) {
     // TODO: implement cart functionality
-    this.router.navigate(['cart']);
+
+    // temporario:
+    if ( item.stock > 0 ) {
+      this.sendEmail(item);
+    } else {
+      alert("Os estoques para esse produto acabaram!")
+    }
+
+    // this.router.navigate(['cart']);
   }
+
+  sendEmail(item: Item) {
+    const sebboEmail = "user@example.com";
+    const subject = "[COMPRA]"
+    const message = `Olá,%0D%0 %0D%0AAgostaria de comprar o livro ${ item.name }, de codigo ${ item.id }.%0D%0A %0D%0AEntre em contato comigo!`
+      .replace(" ", "%20");
+    window.location.href = `mailto:${sebboEmail}?subject=${subject}&body=${message}`;
+  }
+
 }
