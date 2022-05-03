@@ -23,7 +23,7 @@ export class AuthService {
     const body = { email, password }
     return this.http.post<AuthResponse>(loginUrl, body).pipe(
       tap(res => this.setSession(res))
-    )
+    );
   }
 
   register(user: User): Observable<AuthResponse> {
@@ -31,14 +31,12 @@ export class AuthService {
     return this.http.post<AuthResponse>(loginUrl, user);
   }
 
-  getUserByToken(): void {
-    // sends request with token and set user in session
+  getUserByToken(): Observable<User> {
     const loginUrl = this.URL + "data";
     const jwtToken = localStorage.getItem('jwt_token');
-    this.http.post<User>(loginUrl, { jwtToken }).pipe(
-        tap(user => this.sessionService.setUser(user)
-      )
-    ).subscribe();
+    return this.http.post<User>(loginUrl, { jwtToken }).pipe(
+      tap(user => this.sessionService.setUser(user))
+    );
   }
 
 

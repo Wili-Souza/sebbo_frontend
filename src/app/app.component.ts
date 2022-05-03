@@ -35,9 +35,7 @@ export class AppComponent {
     if ( user ) {
       this.isUserLogged = true;
     } else if ( this.authService.isLoggedIn() ) {
-      console.log("did not find user, getting with jwwt");
-      
-      this.authService.getUserByToken();
+      this.authService.getUserByToken().subscribe();
     }
   }
 
