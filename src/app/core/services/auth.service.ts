@@ -30,11 +30,22 @@ export class AuthService {
     const loginUrl = this.URL + "register";
     return this.http.post<AuthResponse>(loginUrl, user);
   }
-          
-  private setSession(authResponse: AuthResponse) {
-      localStorage.setItem('jwt_token', authResponse.token);
-      this.sessionService.setUser(authResponse.user);
-  }          
+
+  getUserByToken(): void {
+    // sends request with token and set user in session
+    const loginUrl = this.URL + "data";
+    const jwtToken = localStorage.getItem('jwt_token');
+    this.http.post<User>(loginUrl, { jwtToken }).pipe(
+        tap(user => this.sessionService.setUser(user)
+      )
+    ).subscribe();
+  }
+
+
+  getByToken(jwtToken: string): Observable<User> {
+    const loginUrl = this.URL;
+    return this.http.get<User>(loginUrl);
+  }
 
   logout() {
       localStorage.removeItem("jwt_token");
@@ -48,4 +59,9 @@ export class AuthService {
   isLoggedOut() {
       return !this.isLoggedIn();
   }
+          
+  private setSession(authResponse: AuthResponse) {
+      localStorage.setItem('jwt_token', authResponse.token);
+      this.sessionService.setUser(authResponse.user);
+  }   
 }

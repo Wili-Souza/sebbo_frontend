@@ -2,15 +2,18 @@
     <div class="tag"></div>
     <div class="logo" routerLink="/home">Sebbo</div>
     <div class="items">
-        <a routerLink="/cart" class="circle" routerLink="/cart">
+        <!-- <a class="circle" routerLink="/cart">
             <fa-icon [icon]="icons.cart"></fa-icon>
-        </a>
-        <a routerLink="/user"  class="circle" routerLink="/user">
+        </a> -->
+        <!-- <a class="circle" routerLink="/user">
             <fa-icon [icon]="icons.user"></fa-icon>
-        </a>
-        <a *ngIf="userLogged" class="circle" routerLink="/admin">
+        </a> -->
+        <a *ngIf="userLogged" class="circle" (click)="onLogout()">
             <fa-icon [icon]="icons.admin"></fa-icon>
         </a>
+        <!-- <a *ngIf="userLogged" class="circle" routerLink="/admin">
+            <fa-icon [icon]="icons.admin"></fa-icon>
+        </a> -->
     </div>
 </div>
 

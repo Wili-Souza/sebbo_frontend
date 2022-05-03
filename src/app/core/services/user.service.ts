@@ -15,15 +15,4 @@ export class UserService {
   constructor(
     private http: HttpClient
   ) { }
-
-  login(email: string, password: string): Observable<AuthResponse> {
-    const loginUrl = this.URL + "login";
-    const body = { email, password }
-    return this.http.post<AuthResponse>(loginUrl, body);
-  }
-
-  register(user: User): Observable<AuthResponse> {
-    const loginUrl = this.URL + "register";
-    return this.http.post<AuthResponse>(loginUrl, user);
-  }
 }

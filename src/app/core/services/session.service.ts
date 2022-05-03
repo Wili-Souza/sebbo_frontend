@@ -12,7 +12,8 @@ export class SessionService {
 
   setUser(user: User) {
     this.user.next(user);
-    console.log("user setado como: ", user);
+    console.log("setou user como: ", user);
+    
   }
 
   resetUser(): void {

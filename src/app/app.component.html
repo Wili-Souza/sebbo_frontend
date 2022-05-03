@@ -1,5 +1,5 @@
 <div #header class="header-wrapper">
-    <app-header></app-header>
+    <app-header [userLogged]="isUserLogged" (logout)="logout()"></app-header>
 </div>
 
 <router-outlet></router-outlet>

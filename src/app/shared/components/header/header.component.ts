@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { faUserTie, faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
-import { SessionService } from 'src/app/core/services/session.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { faUserTie, faShoppingCart, faUser, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-header',
@@ -8,29 +7,21 @@ import { SessionService } from 'src/app/core/services/session.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  userLogged = false;
+  @Input() userLogged = false;
+  @Output() logout = new EventEmitter<void>();
 
   icons = {
     cart: faShoppingCart,
     user: faUser,
-    admin: faUserTie
+    admin: faUserTie,
+    logout: faSignOutAlt
   }
 
-  constructor(
-    private sessionService: SessionService
-  ) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.makeSubscriptions();
+  ngOnInit(): void {}
+
+  onLogout() {
+    this.logout.emit();
   }
-
-  private makeSubscriptions(): void {
-    this.sessionService.user.subscribe( user => {
-      if ( user ) this.userLogged = true;
-      else this.userLogged = false;
-
-      // TODO: future authorization for admin
-    });
-  }
-
 }
