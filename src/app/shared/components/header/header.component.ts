@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faUserTie, faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { SessionService } from 'src/app/core/services/session.service';
 
 @Component({
   selector: 'app-header',
@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   }
 
   constructor(
-    private authService: AuthService
+    private sessionService: SessionService
   ) { }
 
   ngOnInit(): void {
@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
   }
 
   private makeSubscriptions(): void {
-    this.authService.user.subscribe( user => {
+    this.sessionService.user.subscribe( user => {
       if ( user ) this.userLogged = true;
       else this.userLogged = false;
 

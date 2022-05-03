@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { MessagesService } from 'src/app/core/services/messages.service';
-import { UserService } from 'src/app/core/services/user.service';
+import { SessionService } from 'src/app/core/services/session.service';
 
 @Component({
   selector: 'app-login',
@@ -20,21 +20,18 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserService,
     private authService: AuthService,
     private location: Location,
     private messagesService: MessagesService
   ) { }
 
-  ngOnInit(): void {
-    console.log("login started");}
+  ngOnInit(): void {}
 
   login(): void {
     if ( this.loginForm.valid ) {
       if (this.showErrorMessages) this.showErrorMessages = false;
       const data = this.loginForm.value;
-      this.userService.login(data.email, data.password).subscribe( user => {
-        this.authService.setUser(user);
+      this.authService.login(data.email, data.password).subscribe( data => {
         this.navigateBack();
       }, error => this.showMessageFromStatus(error));
     } else {

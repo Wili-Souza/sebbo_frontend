@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AuthResponse } from 'src/app/shared/models/auth-response';
 import { User } from 'src/app/shared/models/user';
 import { environment } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +16,14 @@ export class UserService {
     private http: HttpClient
   ) { }
 
-  login(email: string, password: string): Observable<User> {
+  login(email: string, password: string): Observable<AuthResponse> {
     const loginUrl = this.URL + "login";
     const body = { email, password }
-    return this.http.post<User>(loginUrl, body);
+    return this.http.post<AuthResponse>(loginUrl, body);
   }
 
-  register(user: User): Observable<User> {
+  register(user: User): Observable<AuthResponse> {
     const loginUrl = this.URL + "register";
-    return this.http.post<User>(loginUrl, user);
+    return this.http.post<AuthResponse>(loginUrl, user);
   }
 }
