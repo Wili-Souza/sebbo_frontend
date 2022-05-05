@@ -1,0 +1,63 @@
+
+<form [formGroup]="registerForm" (ngSubmit)="register()" class="form">
+
+    <div class="field-container">
+        <label for="name" class="label">Nome</label>
+        <input id="name" type="text" formControlName="name" placeholder="ex.: João Pedro da Silva"
+            [class.invalid]="c('name')?.invalid && (c('name')?.touched || showErrorMessages)"/>
+        <div  *ngIf="c('name')?.errors?.required && showErrorMessages" class="error-message">
+            Este campo é obrigatório!
+        </div>
+    </div>
+
+    <div class="field-container">
+        <label for="email" class="label">Email</label>
+        <input id="email" type="text" formControlName="email" type="email" placeholder="exemplo@email.com"
+            [class.invalid]="c('email')?.invalid && (c('email')?.touched || showErrorMessages)"/>
+        <div  *ngIf="c('email')?.errors?.required && showErrorMessages" class="error-message">
+            Este campo é obrigatório!
+        </div>
+        <div  *ngIf="c('email')?.errors?.email && showErrorMessages" class="error-message">
+            Email inválido!
+        </div>
+    </div>
+
+    <div class="field-container">
+        <label for="phone" class="label">Telefone</label>
+        <input id="phone" type="text" formControlName="phone" placeholder="Insira somente números"
+            [class.invalid]="c('phone')?.invalid && (c('phone')?.touched || showErrorMessages)"/>
+        <div  *ngIf="c('phone')?.errors?.required && showErrorMessages" class="error-message">
+            Este campo é obrigatório!
+        </div>
+        <div  *ngIf="c('phone')?.errors?.pattern && showErrorMessages" class="error-message">
+            Telefone inválido.
+        </div>
+    </div>
+
+    <div class="field-container">
+        <label for="password" class="label">Senha</label>
+        <input id="password" type="password" formControlName="password" placeholder="Senha"
+            [class.invalid]="c('password')?.invalid && (c('password')?.touched || showErrorMessages)"/>
+        <div  *ngIf="c('password')?.errors?.required && showErrorMessages" class="error-message">
+            Este campo é obrigatório!
+        </div>
+        <div  *ngIf="c('password')?.errors?.minlength && showErrorMessages" class="error-message">
+            Senha muito curta.
+        </div>
+    </div>
+
+    <div class="field-container">
+        <label for="confirmPassword" class="label">Confirme sua senha</label>
+        <input id="confirmPassword" type="password" formControlName="confirmPassword" placeholder="Confirmar senha"
+            [class.invalid]="c('confirmPassword')?.invalid && (c('confirmPassword')?.touched || showErrorMessages)"/>
+        <div  *ngIf="c('confirmPassword')?.errors?.required && showErrorMessages" class="error-message">
+            Este campo é obrigatório!
+        </div>
+        <div  *ngIf="c('confirmPassword')?.errors?.mustMatch && showErrorMessages" class="error-message">
+            A senha e sua confirmação devem ser iguais.
+        </div>
+    </div>
+    
+    <button type="submit" class="btn center">Cadastrar</button>
+    <a class="register-link center" routerLink="/auth/login">Já possui uma conta? Faça login!</a>
+</form>

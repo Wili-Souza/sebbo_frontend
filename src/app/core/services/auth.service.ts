@@ -28,7 +28,9 @@ export class AuthService {
 
   register(user: User): Observable<AuthResponse> {
     const loginUrl = this.URL + "register";
-    return this.http.post<AuthResponse>(loginUrl, user);
+    return this.http.post<AuthResponse>(loginUrl, user).pipe(
+      tap(res => this.setSession(res))
+    );
   }
 
   getUserByToken(): Observable<User> {

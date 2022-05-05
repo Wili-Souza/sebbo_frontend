@@ -1,0 +1,81 @@
+.form {
+    width: 100%;
+    color: #666;
+    box-sizing: border-box;
+    padding: 0 5% 2rem 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+
+    .field-container {
+        margin-bottom: 1.5rem;
+    }
+
+    label:after {
+        content: ":";
+    }
+
+    input {
+        box-sizing: border-box;
+        padding: 10px;
+        background-color: #fff;
+        border: 2px solid #ccc;
+        transition: .2s all;
+        border-radius: 2px;
+        font-size: 1.2rem;
+        width: 100%;
+        color: #666;
+
+        &:focus {
+            outline: none;
+            border-color: #aaa;
+        }
+
+        &.invalid {
+            background-color: #ffeaee;
+            border-color: rgb(239, 194, 194);
+        }
+    }
+
+    ::-webkit-input-placeholder {
+        color: rgb(180, 180, 180);
+        font-weight: 300;
+    }
+
+    .error-message {
+        color: rgb(254, 128, 128);
+    }
+
+    .register-link {
+        margin-top: 10px;
+    }
+
+    button {
+        cursor: pointer;
+        width: 50%;
+        min-width: 20rem;
+        border: none;
+        font-size: 1.1rem;
+        padding: 1rem 2rem;
+        transition: .3s all;
+        background-color: var(--base);
+        color: var(--light-background);
+        margin-top: 2rem;
+
+        &:hover {
+            background-color: var(--light-background);
+            color: var(--base);
+        }
+
+        &:active {
+            opacity: .6;
+        }
+    }
+
+    .center {
+        width: fit-content;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
