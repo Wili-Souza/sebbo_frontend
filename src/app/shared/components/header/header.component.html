@@ -5,9 +5,9 @@
         <!-- <a class="circle" routerLink="/cart">
             <fa-icon [icon]="icons.cart"></fa-icon>
         </a> -->
-        <!-- <a class="circle" routerLink="/user">
+        <a class="circle" routerLink="/auth/login">
             <fa-icon [icon]="icons.user"></fa-icon>
-        </a> -->
+        </a>
         <a *ngIf="userLogged" class="circle" (click)="onLogout()">
             <fa-icon [icon]="icons.admin"></fa-icon>
         </a>

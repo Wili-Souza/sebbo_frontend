@@ -12,16 +12,17 @@ export class MessagesService {
     private snackBar: MatSnackBar
   ) {}
 
-  fromStatus(error: any): void {
-    const status = error.status;
+  fromStatus(errorRes: any): void {
+    const status = errorRes.status;
     if ( !status ) return;
-
     if ( status === 401 ) {
       this.error("Login ou senha incorretos!");
     } else if ( status === 200 ) {
       this.success("Operação bem sucedida!");
     } else if ( status === 403 ) {
       this.success("Autorização negada.");
+    } else if ( status === 500 ) {
+      this.error(errorRes.error.message || "Erro interno, tente novamente mais tarde.");
     }
   }
 
