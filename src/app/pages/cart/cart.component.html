@@ -1,1 +1,55 @@
-<p>cart works!</p>
+<app-section-title title="Carrinho de Compras"></app-section-title>
+
+<div class="section">
+    <app-back-button (goBack)="goback()"></app-back-button>
+
+    <div class="cart-container">
+        <div class="card products-card">
+            <h4 class="title">{{ 'Meu carrinho' | uppercase }}</h4>
+            <hr>
+
+            <div class="products-container">
+                <div *ngFor="let product of products" class="product-card">
+                    <div class="image">
+                        <img [src]="product.book.imageUrl" alt="book cover image">
+                    </div>
+                    <div class="info">
+                        <h2 class="price">{{ product.book.price | currency }}</h2>
+                        <h4 routerLink="/item-detail/{{product.book.id}}" class="name">
+                            {{ product.book.name | titlecase }}
+                        </h4>
+                        <div class="quantity"> Quantidade: {{ product.quantity }}</div>
+                        <div class="buttons-container">
+                            <button (click)="subtractItem(product)" 
+                                class="btn btn-circle"
+                            > 
+                                <fa-icon [icon]="icons.subtract"></fa-icon> 
+                            </button>
+                            <button (click)="addItem(product)" 
+                                class="btn btn-circle"
+                            > 
+                                <fa-icon [icon]="icons.add"></fa-icon> 
+                            </button>
+                        </div>
+                    </div>
+                    <div (click)="removeItem(product)" class="btn-remove"  matTooltipPosition="above" matTooltip="Remover do carrinho"> 
+                        <fa-icon [icon]="icons.remove"></fa-icon>
+                    </div>
+                </div>
+            </div>
+
+            <div class="total-value-container">
+                Valor total: <span class="total-value">{{ totalValue | currency }}</span>
+            </div>
+        </div>
+
+        <div class="card resume-card">
+            <h4 class="title">{{ 'Resumo' | uppercase }}</h4>
+            <hr>
+            <div class="total-value-container">
+                Valor total: <span class="total-value">{{ totalValue | currency }}</span>
+            </div>
+            <button (click)="confirm()" class="btn btn-dark">Finalizar</button>
+        </div>
+    </div>
+</div>

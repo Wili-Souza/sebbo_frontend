@@ -22,7 +22,7 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
     SharedModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
   providers: [
     {

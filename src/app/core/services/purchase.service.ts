@@ -67,4 +67,11 @@ export class PurchaseService {
     const body = { id: idPurchaseItem };
     return this.http.post<Purchase>(url, body);
   }
+
+    // confirm car purchase
+  confirm(userId: string, purchaseId: string): Observable<any> {
+    const url = this.baseUrl + "user/" + userId + "/purchase/cart/confirm/";
+    const body = { id: purchaseId }
+    return this.http.get<any>(url);
+  }
 }
