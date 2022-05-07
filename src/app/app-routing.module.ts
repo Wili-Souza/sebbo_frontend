@@ -23,7 +23,7 @@ const routes: Routes = [
   },
   {
     path: "cart",
-    component: ItemDetailComponent,
+    loadChildren: () => import('./pages/cart/cart.module').then(m => m.CartModule),
     canActivate: [UserAuthenticationGuard]
   },
   {
