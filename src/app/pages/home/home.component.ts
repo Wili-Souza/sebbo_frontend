@@ -33,20 +33,11 @@ export class HomeComponent implements OnInit {
   }
 
   buyItem(item: Item) {
-    // TODO: implement cart functionality
-
-    // temporario:
-    if ( item.stock > 0 ) {
-      if ( this.authService.isLoggedIn() ) {
-        this.sendEmail(item);
-      } else {
-        this.router.navigate(["/auth/login"])
-      }
+    if ( item.stock === 0 ) {
+      alert("Item fora de estoque");
     } else {
-      alert("Os estoques para esse produto acabaram!")
+      this.router.navigate(['cart'], { state: { item: item } });
     }
-
-    // this.router.navigate(['cart']);
   }
 
   sendEmail(item: Item) {
@@ -56,5 +47,4 @@ export class HomeComponent implements OnInit {
       .replace(" ", "%20");
     window.location.href = `mailto:${sebboEmail}?subject=${subject}&body=${message}`;
   }
-
 }

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { faUserTie, faShoppingCart, faUser, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faUserTie, faShoppingCart, faUser, faSignOutAlt, faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +14,8 @@ export class HeaderComponent implements OnInit {
     cart: faShoppingCart,
     user: faUser,
     admin: faUserTie,
-    logout: faSignOutAlt
+    logout: faSignOutAlt,
+    arrowRight: faLongArrowAltRight
   }
 
   constructor() { }

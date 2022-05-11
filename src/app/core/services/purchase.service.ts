@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Item } from 'src/app/shared/models/item';
 import { Purchase } from 'src/app/shared/models/purchase';
 import { environment } from 'src/environments/environment';
 
@@ -15,18 +14,19 @@ export class PurchaseService {
     private http: HttpClient
   ) { }
 
-  // cria com status pending
-  create(userId: string, items: Item[]): Observable<Purchase> {
-    const url = this.baseUrl + "user/" + userId + "/purchase";
-    const body = { items };
-    return this.http.post<Purchase>(url, body);
+  // nao testado
+  create(userId: string, bookId: string): Observable<Purchase> {
+    const url = this.baseUrl + "user/" + userId + "/" + bookId + "/purchase";
+    return this.http.post<Purchase>(url, {});
   }
 
+  // NAO USADO
   getAll(userId: string): Observable<Purchase[]> {
     const url = this.baseUrl + "user/" + userId + "/purchase";
     return this.http.get<Purchase[]>(url);
   }
 
+  // NAO USADO  
   getById(userId: string, purchaseId: string): Observable<Purchase> {
     const url = this.baseUrl + "user/" + userId + "/purchase/" + purchaseId;
     return this.http.get<Purchase>(url);
@@ -34,44 +34,47 @@ export class PurchaseService {
 
   // Cart
 
-    // get cart purchase 
+  //  OK
   getCartPurchase(userId: string): Observable<Purchase> {
     const url = this.baseUrl + "user/" + userId + "/purchase/cart";
     return this.http.get<Purchase>(url);
   }
 
-    // add quantity
+  // OK
   addItemQuantity(userId: string, itemId: string, quantity: number): Observable<Purchase> {
     const url = this.baseUrl + "user/" + userId + "/purchase/cart/add-quantity/";
+    console.log(quantity);
+    
     const body = { id: itemId, quantity };
     return this.http.post<Purchase>(url, body);
   }
 
-    // remove quantity
+  // OK
   removeItemQuantity(userId: string, itemId: string, quantity: number): Observable<Purchase> {
     const url = this.baseUrl + "user/" + userId + "/purchase/cart/remove-quantity/";
+    console.log(quantity);
     const body = { id: itemId, quantity };
     return this.http.post<Purchase>(url, body);
   }
 
-    // add item -> adicionar ao carrinho
+  // OK
   addItem(userId: string, idItem: string): Observable<Purchase> {
     const url = this.baseUrl + "user/" + userId + "/purchase/cart/add/";
     const body = { id: idItem };
     return this.http.post<Purchase>(url, body);
   }
 
-    // remove item
+  // OK
   removeItem(userId: string, idPurchaseItem: string): Observable<Purchase> {
     const url = this.baseUrl + "user/" + userId + "/purchase/cart/remove/";
     const body = { id: idPurchaseItem };
     return this.http.post<Purchase>(url, body);
   }
 
-    // confirm car purchase
+  // nao testado
   confirm(userId: string, purchaseId: string): Observable<any> {
     const url = this.baseUrl + "user/" + userId + "/purchase/cart/confirm/";
     const body = { id: purchaseId }
-    return this.http.get<any>(url);
+    return this.http.post<any>(url, body);
   }
 }

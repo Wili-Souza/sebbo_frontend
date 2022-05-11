@@ -15,7 +15,7 @@
                     </div>
                     <div class="info">
                         <h2 class="price">{{ product.book.price | currency }}</h2>
-                        <h4 routerLink="/item-detail/{{product.book.id}}" class="name">
+                        <h4 routerLink="/item-detail/{{product.book.id}}" class="name clickable">
                             {{ product.book.name | titlecase }}
                         </h4>
                         <div class="quantity"> Quantidade: {{ product.quantity }}</div>
@@ -25,14 +25,14 @@
                             > 
                                 <fa-icon [icon]="icons.subtract"></fa-icon> 
                             </button>
-                            <button (click)="addItem(product)" 
+                            <button (click)="sumItem(product)" 
                                 class="btn btn-circle"
                             > 
                                 <fa-icon [icon]="icons.add"></fa-icon> 
                             </button>
                         </div>
                     </div>
-                    <div (click)="removeItem(product)" class="btn-remove"  matTooltipPosition="above" matTooltip="Remover do carrinho"> 
+                    <div (click)="removeItem(product.book)" class="btn-remove"  matTooltipPosition="above" matTooltip="Remover do carrinho"> 
                         <fa-icon [icon]="icons.remove"></fa-icon>
                     </div>
                 </div>

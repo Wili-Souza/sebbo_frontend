@@ -113,4 +113,12 @@ hr {
             opacity: .8;
         }
     }
+
+    .clickable {
+        cursor: pointer;
+
+        &:hover {
+            opacity: .8;
+        }
+    }
 }
