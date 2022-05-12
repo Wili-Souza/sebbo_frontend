@@ -12,32 +12,32 @@ import { Item } from 'src/app/shared/models/item';
 import { faMinus, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 const mockCoverUrl = "https://ludis.com.br/wp-content/uploads/2020/05/book-img2.jpg";
-const productsMock = [
-  {
-    quantity: 2,
-    book: {
-      imageUrl: mockCoverUrl,
-      name: "Livro 1",
-      price: 20.50,
-      id: "id123",
-      sinopse: "Um livro legal para a galerinha",
-      author: "João",
-      stock: 4,
-    }
-  },
-  {
-    quantity: 1,
-    book: {
-      imageUrl: mockCoverUrl,
-      name: "Livro 2",
-      price: 10.50,
-      id: "id123",
-      sinopse: "Um livro legal para a galerinha",
-      author: "João",
-      stock: 3,
-    }
-  }
-];
+// const productsMock = [
+//   {
+//     quantity: 2,
+//     book: {
+//       imageUrl: mockCoverUrl,
+//       name: "Livro 1",
+//       price: 20.50,
+//       id: "id123",
+//       sinopse: "Um livro legal para a galerinha",
+//       author: "João",
+//       stock: 4,
+//     }
+//   },
+//   {
+//     quantity: 1,
+//     book: {
+//       imageUrl: mockCoverUrl,
+//       name: "Livro 2",
+//       price: 10.50,
+//       id: "id123",
+//       sinopse: "Um livro legal para a galerinha",
+//       author: "João",
+//       stock: 3,
+//     }
+//   }
+// ];
 
 @Component({
   selector: 'app-cart',
@@ -86,14 +86,15 @@ export class CartComponent implements OnInit {
 
   fetchProductsAndAddnew() {
     if ( this.userId ) {
-      console.log("fetching and adding new");
+      // console.log("fetching and adding new");
       
       this.purchaseService.getCartPurchase(this.userId).subscribe( purchase => {
-        console.log("gotpurchase:", purchase);
+        // console.log("gotpurchase:", purchase);
         this.purchase = purchase || undefined;
         this.products = this.mapProducts(purchase);
-        console.log(this.products);
+        // console.log(this.products);
         
+        console.log("got products and adding...: ", this.products);
         this.addItemIfPassed();
       }, error => console.log(error));
     }
@@ -119,13 +120,9 @@ export class CartComponent implements OnInit {
       this.purchaseService.getCartPurchase(this.userId).subscribe( purchase => {
         this.purchase = purchase || undefined;
         this.products = this.mapProducts(purchase);
-        console.log(this.products);
+        console.log("got products: ", this.products);
       }, error => console.log(error));
     }
-  }
-
-  getProducts() {
-
   }
 
   addItemIfPassed() {
@@ -136,8 +133,6 @@ export class CartComponent implements OnInit {
           console.log("purchase exists, adding item...");
           this.addItem(item);
         } else if ( this.userId && item.id ) {
-          console.log("creating new purchase");
-          
           this.createPurchase(this.userId, item);
         }
       }
@@ -148,7 +143,7 @@ export class CartComponent implements OnInit {
     this.purchaseService.create(userId, item.id || "").subscribe(purchase => {
       console.log("created purchase: ", purchase);
       this.purchase = purchase;
-      this.addItem(item);
+      this.fetchProducts();  
     })
   }
 
@@ -173,14 +168,29 @@ export class CartComponent implements OnInit {
   }
 
   confirm(): void {
-    if ( this.userId ) {
+    if ( this.userId && this.products && this.products?.length > 0) {
       this.purchaseService.confirm(this.userId, this.purchase.id).subscribe( () => {
+        this.sendEmailWithCart();
         this.messagesService.success("Compra finalizada com sucesso.");
         this.router.navigate(["/home"]);
       }, error => {
         this.messagesService.fromStatus(error);
       })
+    } else if ( this.products && this.products.length === 0 ) {
+      alert("Nenhum item no carrinho!");  
     }
+  }
+
+  private sendEmailWithCart() {
+    let itemsList = "";
+    this.products?.forEach( product => {
+      itemsList += `${product.book.name} (${product.book.id}) | quantidade: ${product.quantity}%0D`;
+    });
+    const sebboEmail = "user@example.com";
+    const subject = "[COMPRA]"
+    const message = `Olá, %0D %0DEu gostaria de comprar os livros: %0D${ itemsList }%0DEntre em contato comigo!`
+      .replace(" ", "%20");
+    window.location.href = `mailto:${sebboEmail}?subject=${subject}&body=${message}`;
   }
 
   goback(): void {

@@ -71,7 +71,7 @@ export class PurchaseService {
     return this.http.post<Purchase>(url, body);
   }
 
-  // nao testado
+  // OK
   confirm(userId: string, purchaseId: string): Observable<any> {
     const url = this.baseUrl + "user/" + userId + "/purchase/cart/confirm/";
     const body = { id: purchaseId }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { footerSections } from 'src/assets/data/footer-sections';
 import { AuthService } from './core/services/auth.service';
 import { MessagesService } from './core/services/messages.service';
@@ -18,7 +19,8 @@ export class AppComponent {
   constructor(
     private authService: AuthService,
     private sessionService: SessionService,
-    private messagesService: MessagesService
+    private messagesService: MessagesService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -48,5 +50,6 @@ export class AppComponent {
 
   logout(): void {
     this.authService.logout();
+    this.router.navigate(["/home"]);
   }
 }

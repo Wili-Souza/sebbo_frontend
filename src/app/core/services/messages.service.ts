@@ -20,7 +20,9 @@ export class MessagesService {
     } else if ( status === 200 ) {
       this.success("Operação bem sucedida!");
     } else if ( status === 403 ) {
-      this.success("Autorização negada.");
+      this.error("Autorização negada.");
+    } else if ( status === 422 ) {
+      this.error("Email ou senha incorretos.");
     } else if ( status === 500 ) {
       this.error(errorRes.error.message || "Erro interno, tente novamente mais tarde.");
     }
