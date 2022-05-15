@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserAuthenticationGuard } from './core/guards/user-authentication.guard';
 import { ItemDetailComponent } from './pages/item-detail/item-detail.component';
+import { UserComponent } from './pages/user/user.component';
 
 const routes: Routes = [
   {
@@ -28,7 +29,7 @@ const routes: Routes = [
   },
   {
     path: "user",
-    component: ItemDetailComponent,
+    component: UserComponent,
     canActivate: [UserAuthenticationGuard]
   },
   {

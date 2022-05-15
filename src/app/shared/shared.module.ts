@@ -32,6 +32,7 @@ import { RouterModule } from '@angular/router';
     ItemCardComponent,
     SectionTitleComponent,
     BackButtonComponent,
+    ReactiveFormsModule,
   ]
 })
 export class SharedModule { }

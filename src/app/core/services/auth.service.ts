@@ -61,6 +61,8 @@ export class AuthService {
           
   private setSession(authResponse: AuthResponse) {
       localStorage.setItem('jwt_token', authResponse.token);
+      console.log("setting session: ", authResponse.user);
+      
       this.sessionService.setUser(authResponse.user);
   }   
 }

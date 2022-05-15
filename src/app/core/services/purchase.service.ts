@@ -15,8 +15,8 @@ export class PurchaseService {
   ) { }
 
   // nao testado
-  create(userId: string, bookId: string): Observable<Purchase> {
-    const url = this.baseUrl + "user/" + userId + "/" + bookId + "/purchase";
+  create(userId: string): Observable<Purchase> {
+    const url = this.baseUrl + "user/" + userId + "/purchase";
     return this.http.post<Purchase>(url, {});
   }
 
@@ -44,7 +44,6 @@ export class PurchaseService {
   addItemQuantity(userId: string, itemId: string, quantity: number): Observable<Purchase> {
     const url = this.baseUrl + "user/" + userId + "/purchase/cart/add-quantity/";
     console.log(quantity);
-    
     const body = { id: itemId, quantity };
     return this.http.post<Purchase>(url, body);
   }

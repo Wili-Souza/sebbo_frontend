@@ -37,6 +37,8 @@ h1, h2, h3, h4, h5, p, span {
     --light-background: #FFFFFF;
     --image-background: #F8F8F8;
     --shadow: #143a5151;
+    --dark-red: rgb(197, 47, 47);
+    --dark-green: rgb(47, 197, 102);
 }
 
 .section {
@@ -63,11 +65,9 @@ h1, h2, h3, h4, h5, p, span {
 
 // button
 
-
-
 .btn {
     font-size: 1rem;
-    align-self: flex-end;
+    // align-self: flex-end;
     width: 100%;
     border: none;
     padding: 10px 2rem;
@@ -83,6 +83,25 @@ h1, h2, h3, h4, h5, p, span {
     &:active {
         opacity: .7;
     }
+}
+
+.btn-red, .btn-green {
+    color: var(--light-background);
+    &:hover {
+        opacity: .7;
+    }
+
+    &:active {
+        opacity: .9;
+    }
+}
+
+.btn-red {
+    background-color: var(--dark-red);
+}
+
+.btn-green {
+    background-color: var(--dark-green);
 }
 
 .btn-dark {

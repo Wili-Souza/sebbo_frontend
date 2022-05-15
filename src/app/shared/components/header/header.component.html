@@ -4,15 +4,18 @@
     <div class="items">
         <!-- TODO: change icons -->
         <!-- TODO: create login/register buttons -->
+        <a *ngIf="userLogged" class="circle" routerLink="/user">
+            <fa-icon [icon]="icons.user"></fa-icon>
+        </a>
         <a class="circle" routerLink="/cart">
             <fa-icon [icon]="icons.cart"></fa-icon>
+        </a>
+        <a *ngIf="!userLogged" class="circle bold" routerLink="/auth/login">
+            <fa-icon [icon]="icons.login"></fa-icon>
         </a>
         <a *ngIf="userLogged" class="circle bold" (click)="onLogout()">
             [<fa-icon [icon]="icons.arrowRight"></fa-icon>
         </a>
-        <!-- <a class="circle" routerLink="/auth/login">
-            <fa-icon [icon]="icons.user"></fa-icon>
-        </a> -->
         <!-- <a *ngIf="userLogged" class="circle" routerLink="/admin">
             <fa-icon [icon]="icons.admin"></fa-icon>
         </a> -->

@@ -10,6 +10,8 @@ import { PurchaseItem } from 'src/app/shared/models/purchase-item';
 import { Item } from 'src/app/shared/models/item';
 
 import { faMinus, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { Subject } from 'rxjs';
+import { finalize, tap } from 'rxjs/operators';
 
 const mockCoverUrl = "https://ludis.com.br/wp-content/uploads/2020/05/book-img2.jpg";
 // const productsMock = [
@@ -45,6 +47,7 @@ const mockCoverUrl = "https://ludis.com.br/wp-content/uploads/2020/05/book-img2.
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
+  routeStateValue: Subject<{item: Item}> = new Subject<{item: Item}>();
   userId?: string;
   purchase!: Purchase;
   products?: PurchaseItem[];
@@ -70,33 +73,49 @@ export class CartComponent implements OnInit {
     private sessionService: SessionService,
     private messagesService: MessagesService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.listenUserChanges();
+    this.routeStateValue.subscribe( ( routeState => {
+      this.addItem(routeState.item);
+    }));
   }
 
-  listenUserChanges() {
+  private getRouteState() {
+    console.log("chamou route state");
+    
+    const item = window.history.state.item;
+    window.history.state.item = undefined;
+    if (item) {
+      this.routeStateValue.next({ item });
+    }
+  }
+
+  private listenUserChanges() {
     this.sessionService.user.subscribe( user => {
       this.userId = user?.id;
-      this.fetchProductsAndAddnew();
+      if ( this.userId ) {
+        this.fetchProducts();
+      }  
     })
   }
 
-  fetchProductsAndAddnew() {
+  private fetchProducts() {
     if ( this.userId ) {
-      // console.log("fetching and adding new");
-      
-      this.purchaseService.getCartPurchase(this.userId).subscribe( purchase => {
-        // console.log("gotpurchase:", purchase);
-        this.purchase = purchase || undefined;
-        this.products = this.mapProducts(purchase);
-        // console.log(this.products);
-        
-        console.log("got products and adding...: ", this.products);
-        this.addItemIfPassed();
-      }, error => console.log(error));
+      this.purchaseService.getCartPurchase(this.userId)
+      .pipe( finalize( () => this.getRouteState()) )
+      .subscribe( 
+        purchase => {
+          this.purchase = purchase || undefined;
+          this.products = this.mapProducts(purchase);
+        }, 
+        error => {
+          if ( error.status === 404 && this.userId) {
+            this.createPurchase(this.userId);
+          }
+        }
+      );
     }
   }
 
@@ -115,33 +134,8 @@ export class CartComponent implements OnInit {
     return undefined;
   }
 
-  fetchProducts() {
-    if ( this.userId ) {
-      this.purchaseService.getCartPurchase(this.userId).subscribe( purchase => {
-        this.purchase = purchase || undefined;
-        this.products = this.mapProducts(purchase);
-        console.log("got products: ", this.products);
-      }, error => console.log(error));
-    }
-  }
-
-  addItemIfPassed() {
-    this.activatedRoute.paramMap.subscribe(() => {
-      const item = window.history.state.item;
-      if (item) {
-        if ( this.purchase ) {
-          console.log("purchase exists, adding item...");
-          this.addItem(item);
-        } else if ( this.userId && item.id ) {
-          this.createPurchase(this.userId, item);
-        }
-      }
-    });
-  }
-
-  createPurchase(userId: string, item: Item) {
-    this.purchaseService.create(userId, item.id || "").subscribe(purchase => {
-      console.log("created purchase: ", purchase);
+  createPurchase(userId: string) {
+    this.purchaseService.create(userId).subscribe(purchase => {
       this.purchase = purchase;
       this.fetchProducts();  
     })
@@ -153,17 +147,13 @@ export class CartComponent implements OnInit {
 
   addItem(item: Item): void {
     this.cartItem(item, "addItem");
-    this.fetchProducts();
   }
 
   subtractItem(purchaseItem: PurchaseItem): void {
-    console.log(purchaseItem);
-    
     this.cartItemQuantity(purchaseItem, "removeItemQuantity", 1);
   }
 
   sumItem(purchaseItem: PurchaseItem): void {
-    console.log(purchaseItem);
     this.cartItemQuantity(purchaseItem, "addItemQuantity", 1);
   }
 
@@ -193,7 +183,7 @@ export class CartComponent implements OnInit {
     window.location.href = `mailto:${sebboEmail}?subject=${subject}&body=${message}`;
   }
 
-  goback(): void {
+  goback(): void { 
     this.location.back();
   }
 
@@ -208,11 +198,9 @@ export class CartComponent implements OnInit {
   private cartItemQuantity(purchaseItem: PurchaseItem, method: "removeItemQuantity" | "addItemQuantity", quantity: number): void {
     const purchaseItemId = purchaseItem.id;
     if ( this.userId && purchaseItemId) {
-      this.purchaseService[method](this.userId, purchaseItemId, quantity).subscribe((res) => {
-        this.fetchProducts();
-      }, error => {
-        this.messagesService.fromStatus(error);
-      })
+      this.purchaseService[method](this.userId, purchaseItemId, quantity).subscribe(
+        () => { this.fetchProducts() }, 
+        error => { this.messagesService.fromStatus(error) })
     }
   }
 }

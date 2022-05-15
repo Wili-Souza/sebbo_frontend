@@ -1,0 +1,51 @@
+<app-section-title title="Detalhes do Usuário"></app-section-title>
+
+<div class="section">
+    <app-back-button (goBack)="goback()"></app-back-button>
+
+    <div class="card">
+        <h2>Olá, {{ user?.name }}!</h2>
+        <h3>Aqui é possível ver um resumo das suas atividades e atualizar suas informações.</h3>
+    </div>
+
+    <div class="card">
+        <app-section-title title="Detalhes da conta"></app-section-title>
+        <form [formGroup]="userForm" (ngSubmit)="saveUserData()" class="form user-form">
+            <fa-icon (click)="enableUserEdit()" class="icon" [icon]="icons.edit"></fa-icon>
+            <div class="field">
+                <label>Nome de usuário:</label>
+                <input [class.editable]="userEditable" 
+                    [readonly]="!userEditable" formControlName="name" />
+            </div>
+            <div class="field">
+                <label>Email:</label>
+                <input [class.editable]="userEditable" 
+                    [readonly]="!userEditable" formControlName="email" />
+            </div>
+            <div class="field">
+                <label>Telefone:</label>
+                <input [class.editable]="userEditable" 
+                    [readonly]="!userEditable" class="" formControlName="phone" />
+            </div>
+            <div class="buttons-container optional" [class.active]="userEditable">
+                <button type="submit" class="btn btn-green">Salvar</button>
+                <button (click)="cancelUserChange()" class="btn btn-dark">Descartar</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- <div class="card">
+        <app-section-title title="Detalhes dos pedidos"></app-section-title>
+        <h3><b>Nome de usuário:</b> {{ user?.name }}</h3>
+        <h3><b>Email:</b> {{ user?.email }}</h3>
+        <h3><b>Telegone:</b> {{ user?.phone }}</h3>
+    </div> -->
+
+    <div class="card">
+        <app-section-title title="Opções da conta"></app-section-title>
+        <div class="buttons-container">
+            <button (click)="logout()" class="btn btn-dark">Sair da Conta</button>
+            <button (click)="deleteAccount()" class="btn btn-red">Deletar Conta</button>
+        </div>
+    </div>
+</div>
