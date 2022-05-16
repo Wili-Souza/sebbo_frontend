@@ -5,8 +5,12 @@ import { Router } from '@angular/router';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { MessagesService } from 'src/app/core/services/messages.service';
+import { PurchaseService } from 'src/app/core/services/purchase.service';
 import { SessionService } from 'src/app/core/services/session.service';
 import { UserService } from 'src/app/core/services/user.service';
+import { Item } from 'src/app/shared/models/item';
+import { Purchase } from 'src/app/shared/models/purchase';
+import { PurchaseItem } from 'src/app/shared/models/purchase-item';
 import { User } from 'src/app/shared/models/user';
 
 @Component({
@@ -16,6 +20,7 @@ import { User } from 'src/app/shared/models/user';
 })
 export class UserComponent implements OnInit {
   userEditable = false;
+  purchases: Purchase[] = [];
   user?: User;
   icons = {
     edit: faEdit
@@ -35,7 +40,8 @@ export class UserComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private messagesService: MessagesService,
-    private userService: UserService
+    private userService: UserService,
+    private purchaseService: PurchaseService
   ) { }
 
   ngOnInit(): void {
@@ -46,7 +52,18 @@ export class UserComponent implements OnInit {
     this.sessionService.user.subscribe( userData => {
       this.user = userData;
       this.userForm.patchValue(this.user || {});
+      if ( userData?.id ) {
+        this.getPurchases(userData.id);
+      }
     });
+  }
+
+  private getPurchases(userId: string) {
+    this.purchaseService.getAll(userId).subscribe(
+      purchases => { this.purchases = purchases; console.log(this.purchases);
+       },
+      error => this.messagesService.error(error.error.messages)
+    );
   }
 
   goback(): void {
@@ -86,6 +103,15 @@ export class UserComponent implements OnInit {
   cancelUserChange() {
     this.userForm.patchValue(this.user || {});
     this.userEditable = false;
+  }
+
+
+  getValorTotal(items: PurchaseItem[]) {
+    let value = 0;
+    items.forEach( item => {
+      value += item.quantity * item.book.price;
+    })
+    return value;
   }
 
   private updateUser(user: User) {

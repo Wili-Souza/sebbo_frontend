@@ -23,6 +23,8 @@ export class PurchaseService {
   // NAO USADO
   getAll(userId: string): Observable<Purchase[]> {
     const url = this.baseUrl + "user/" + userId + "/purchase";
+    console.log("calling: ", url);
+    
     return this.http.get<Purchase[]>(url);
   }
 

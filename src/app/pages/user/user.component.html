@@ -34,12 +34,33 @@
         </form>
     </div>
 
-    <!-- <div class="card">
-        <app-section-title title="Detalhes dos pedidos"></app-section-title>
-        <h3><b>Nome de usuário:</b> {{ user?.name }}</h3>
-        <h3><b>Email:</b> {{ user?.email }}</h3>
-        <h3><b>Telegone:</b> {{ user?.phone }}</h3>
-    </div> -->
+    <div class="card">
+        <app-section-title title="Histórico de pedidos"></app-section-title>
+        <div *ngFor="let purchase of purchases" class="purchase-info">
+            <div>
+                <h3><b>Data:</b> {{ purchase.created_at | date }}</h3>
+                <h3><b>Status:</b>{{ purchase.status }}</h3>
+                <h3><b>Valor total:</b>{{ getValorTotal(purchase.items) | currency:'R$' }}</h3>
+            </div>
+            <div>
+                <h3><b>Produtos:</b>
+                    <div *ngFor="let item of purchase.items" class="product-info">
+                        <span class="book-title" routerLink="/item/{{item.book.id}}">
+                            {{ item.book.name | titlecase }}
+                        </span>
+                        <div>
+                            <span class="book-price">
+                                Quantidade: {{ item.quantity }}
+                            </span>
+                            <span class="book-price">
+                                Valor unitário: {{ item.book.price | currency}}
+                            </span>
+                        </div>
+                    </div>
+                </h3>
+            </div>
+        </div>
+    </div>
 
     <div class="card">
         <app-section-title title="Opções da conta"></app-section-title>

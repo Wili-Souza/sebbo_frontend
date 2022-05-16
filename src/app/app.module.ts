@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -11,6 +11,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { UserComponent } from './pages/user/user.component';
+import localePt from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localePt, "pt-BR");
 
 @NgModule({
   declarations: [
@@ -32,6 +36,7 @@ import { UserComponent } from './pages/user/user.component';
       useClass: AuthInterceptor,
       multi: true,
     },
+    { provide: LOCALE_ID, useValue: 'pt-BR'}
    ],
   bootstrap: [AppComponent]
 })
