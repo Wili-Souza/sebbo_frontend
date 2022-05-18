@@ -11,7 +11,7 @@ import { Item } from 'src/app/shared/models/item';
 
 import { faMinus, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Subject } from 'rxjs';
-import { finalize, tap } from 'rxjs/operators';
+import { finalize, first, tap } from 'rxjs/operators';
 
 const mockCoverUrl = "https://ludis.com.br/wp-content/uploads/2020/05/book-img2.jpg";
 // const productsMock = [
@@ -83,22 +83,22 @@ export class CartComponent implements OnInit {
   }
 
   private getRouteState() {
-    console.log("chamou route state");
-    
     const item = window.history.state.item;
-    window.history.state.item = undefined;
-    if (item) {
+    if (item && this.purchase) {
+      window.history.state.item = undefined;
       this.routeStateValue.next({ item });
     }
   }
 
   private listenUserChanges() {
-    this.sessionService.user.subscribe( user => {
-      this.userId = user?.id;
-      if ( this.userId ) {
-        this.fetchProducts();
-      }  
-    })
+    this.sessionService.user
+      .pipe(first())
+      .subscribe( user => {
+        this.userId = user?.id;
+        if ( this.userId ) {
+          this.fetchProducts();
+        }  
+      })
   }
 
   private fetchProducts() {
@@ -112,7 +112,7 @@ export class CartComponent implements OnInit {
         }, 
         error => {
           if ( error.status === 404 && this.userId) {
-            this.createPurchase(this.userId);
+            this.createPurchase(this.userId || "");
           }
         }
       );
