@@ -8,8 +8,9 @@ import { Item } from '../../models/item';
 })
 export class ItemCardComponent implements OnInit {
   @Input() item!: Item;
+  @Input() actionName: string = "Comprar";
   @Output() showDetails: EventEmitter<Item> = new EventEmitter<Item>();
-  @Output() buy: EventEmitter<Item> = new EventEmitter<Item>();
+  @Output() action: EventEmitter<Item> = new EventEmitter<Item>();
 
   constructor() { }
 
@@ -21,6 +22,6 @@ export class ItemCardComponent implements OnInit {
   }
 
   onBuy(item: Item): void {
-    this.buy.emit(item);
+    this.action.emit(item);
   }
 }

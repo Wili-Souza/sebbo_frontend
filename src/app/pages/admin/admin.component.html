@@ -1,0 +1,14 @@
+<app-section-title title="Todos os livros:"></app-section-title>
+
+<div class="content section">
+    <div *ngFor="let item of items" class="item-container">
+        <app-item-card
+            [item]="item"
+            (showDetails)="goToItemDetails(item)"
+            (action)="showEditPage(item)"
+            actionName="Editar">
+        </app-item-card>
+    </div>
+</div>
+
+<router-outlet #outlet></router-outlet>

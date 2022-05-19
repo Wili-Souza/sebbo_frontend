@@ -1,0 +1,11 @@
+.content {
+    display: flex;
+    flex-wrap: wrap;
+
+    .item-container {
+        box-sizing: border-box;
+        min-width: 9rem;
+        width: 20%;
+        padding: 10px;
+    }
+} 

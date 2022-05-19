@@ -8,7 +8,6 @@ import { MessagesService } from 'src/app/core/services/messages.service';
 import { PurchaseService } from 'src/app/core/services/purchase.service';
 import { SessionService } from 'src/app/core/services/session.service';
 import { UserService } from 'src/app/core/services/user.service';
-import { Item } from 'src/app/shared/models/item';
 import { Purchase } from 'src/app/shared/models/purchase';
 import { PurchaseItem } from 'src/app/shared/models/purchase-item';
 import { User } from 'src/app/shared/models/user';

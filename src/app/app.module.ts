@@ -10,23 +10,22 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
-import { UserComponent } from './pages/user/user.component';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import { CoreModule } from './core/core.module';
 
 registerLocaleData(localePt, "pt-BR");
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
     SharedModule,
-    HttpClientModule,
+    CoreModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
   ],

@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserAuthenticationGuard } from './core/guards/user-authentication.guard';
-import { ItemDetailComponent } from './pages/item-detail/item-detail.component';
-import { UserComponent } from './pages/user/user.component';
 
 const routes: Routes = [
   {
@@ -29,13 +27,17 @@ const routes: Routes = [
   },
   {
     path: "user",
-    component: UserComponent,
+    loadChildren: () => import('./pages/user/user.module').then(m => m.UserModule),
+    canActivate: [UserAuthenticationGuard]
+  },
+  {
+    path: "admin",
+    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule),
     canActivate: [UserAuthenticationGuard]
   },
   {
     path: "**",
-    pathMatch: "full",
-    redirectTo: ""
+    redirectTo: "/home"
   }
 ];
 

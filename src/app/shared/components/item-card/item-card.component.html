@@ -5,6 +5,6 @@
     <div class="info">
         <h4 (click)="onShowDetails(item)" class="title">{{ item.name }}</h4>
         <p class="price">{{ item.price | currency:'BRL'}}</p>
-        <button class="btn" (click)="onBuy(item)">Comprar</button>
+        <button class="btn" (click)="onBuy(item)">{{actionName}}</button>
     </div>
 </div>

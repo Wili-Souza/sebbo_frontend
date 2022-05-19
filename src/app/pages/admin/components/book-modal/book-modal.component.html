@@ -1,0 +1,34 @@
+<div class="modal-container">
+    <div class="modal">
+        <fa-icon class="icon-close" 
+            [icon]="icons.close"
+            (click)="close()">
+        </fa-icon>
+        <h2>Informações do Livro</h2>
+        <form [formGroup]="bookForm" (ngSubmit)="onSubmit()" class="form">
+            <mat-form-field class="my-form-field" appearance="outline">
+                <mat-label>Nome</mat-label>
+                <input formControlName="name" matInput placeholder="Nome do livro">
+            </mat-form-field>
+            <mat-form-field class="my-form-field" appearance="outline">
+                <mat-label>Autor</mat-label>
+                <input formControlName="author" matInput placeholder="Nome do Autor">
+            </mat-form-field>
+            <mat-form-field class="my-form-field" appearance="outline">
+                <mat-label>Preço</mat-label>
+                <input type="number" formControlName="price" matInput placeholder="ex.: 9.99">
+            </mat-form-field>
+            <mat-form-field class="my-form-field" appearance="outline">
+                <mat-label>Estoque</mat-label>
+                <input type="number" formControlName="stock" matInput placeholder="ex.: 49">
+            </mat-form-field>
+            <mat-form-field class="my-form-field" appearance="outline">
+                <mat-label>Sinopse</mat-label>
+                <textarea formControlName="sinopse" matInput placeholder="Insira uma curta sinopse"></textarea>
+            </mat-form-field>
+            <button type="submit" class="btn btn-green" [disabled]="bookForm.invalid">
+                Salvar
+            </button>
+        </form>
+    </div>
+</div>

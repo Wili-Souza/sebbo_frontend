@@ -59,6 +59,6 @@ export class ItemDetailComponent implements OnInit {
   // }
 
   goback(): void {
-    this.router.navigate(['home']);
+    window.history.back();
   }
 }

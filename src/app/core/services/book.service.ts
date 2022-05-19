@@ -31,4 +31,11 @@ export class BookService {
       map(item => ({ ...item, imageUrl: mockCoverUrl }))
     );
   }
+
+  update(id: string, book: Item): Observable<Item>  {
+    const putBookUrl = this.URL + id;
+    return this.http.put<Item>(putBookUrl, book).pipe(
+      map(item => ({ ...item, imageUrl: mockCoverUrl }))
+    );
+  }
 }

@@ -2,8 +2,6 @@
     <div class="tag"></div>
     <div class="logo" routerLink="/home">Sebbo</div>
     <div class="items">
-        <!-- TODO: change icons -->
-        <!-- TODO: create login/register buttons -->
         <a *ngIf="userLogged" class="circle" routerLink="/user">
             <fa-icon [icon]="icons.user"></fa-icon>
         </a>
@@ -13,12 +11,15 @@
         <a *ngIf="!userLogged" class="circle bold" routerLink="/auth/login">
             <fa-icon [icon]="icons.login"></fa-icon>
         </a>
+
+        <!-- TODO: verify authorization | role -->
+        <a *ngIf="userLogged" class="circle" routerLink="/admin">
+            <fa-icon [icon]="icons.admin"></fa-icon>
+        </a>
+
         <a *ngIf="userLogged" class="circle bold" (click)="onLogout()">
             [<fa-icon [icon]="icons.arrowRight"></fa-icon>
         </a>
-        <!-- <a *ngIf="userLogged" class="circle" routerLink="/admin">
-            <fa-icon [icon]="icons.admin"></fa-icon>
-        </a> -->
     </div>
 </div>
 

@@ -83,6 +83,16 @@ h1, h2, h3, h4, h5, p, span {
     &:active {
         opacity: .7;
     }
+
+    &:disabled {
+        cursor: default;
+        background-color: grey;
+
+        &:hover, &.active {
+            background-color: grey;
+            opacity: 1;
+        }
+    }
 }
 
 .btn-red, .btn-green {
