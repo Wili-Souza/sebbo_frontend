@@ -134,4 +134,11 @@ h1, h2, h3, h4, h5, p, span {
     width: 2rem;
     height: 2rem;
     font-size: 0.7rem;
+
+    &.btn-orange {
+        background-color: rgb(240, 217, 193);
+        border: 2px solid rgb(211, 162, 129);
+        color: rgb(190, 105, 47);
+    }
 }
+

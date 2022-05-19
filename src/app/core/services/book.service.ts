@@ -38,4 +38,16 @@ export class BookService {
       map(item => ({ ...item, imageUrl: mockCoverUrl }))
     );
   }
+
+  create(book: Item): Observable<Item>  {
+    const postBookUrl = this.URL;
+    return this.http.post<Item>(postBookUrl, book).pipe(
+      map(item => ({ ...item, imageUrl: mockCoverUrl }))
+    );
+  }
+
+  delete(id: string): Observable<Item>  {
+    const deleteBookUrl = this.URL + id;
+    return this.http.delete<Item>(deleteBookUrl);
+  }
 }

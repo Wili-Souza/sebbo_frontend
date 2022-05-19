@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { BookService } from 'src/app/core/services/book.service';
 import { Item } from 'src/app/shared/models/item';
 
@@ -11,6 +12,10 @@ import { Item } from 'src/app/shared/models/item';
 export class AdminComponent implements OnInit {
   @ViewChild("outlet") outlet!: RouterOutlet;
   items: Item[] = [];
+  icons = {
+    close: faPlus,
+    delete: faTrashAlt
+  }
 
   constructor(
     private router: Router,
@@ -44,11 +49,25 @@ export class AdminComponent implements OnInit {
     this.router.navigate(['/admin/edit/' + item.id]);
   }
 
-  buyItem(item: Item) {
-    if ( item.stock === 0 ) {
-      alert("Item fora de estoque");
-    } else {
-      this.router.navigate(['cart'], { state: { item: item } });
+  showCreatePage(): void {
+    this.router.navigate(['/admin/create/']);
+  }
+
+  remove(item: Item): void {
+    const confirmed = confirm("Deseja remover esse item permanentemente?");
+    if ( confirmed && item.id ) {
+      this.bookService.delete(item.id).subscribe(
+        () => this.fetchData(),
+        error => console.log(error)
+      );
     }
   }
+
+  // buyItem(item: Item) {
+  //   if ( item.stock === 0 ) {
+  //     alert("Item fora de estoque");
+  //   } else {
+  //     this.router.navigate(['cart'], { state: { item: item } });
+  //   }
+  // }
 }

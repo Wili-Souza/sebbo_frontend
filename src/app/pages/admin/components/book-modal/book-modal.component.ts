@@ -64,6 +64,11 @@ export class BookModalComponent implements OnInit {
         () => this.close(),
         errorRes => this.messageServices.error(errorRes.error.message)
       );
+    } else {
+      this.bookService.create(book).subscribe(
+        () => this.close(),
+        errorRes => this.messageServices.error(errorRes.error.message)
+      );
     }
   }
 }
