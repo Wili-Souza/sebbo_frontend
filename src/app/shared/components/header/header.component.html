@@ -12,8 +12,7 @@
             <fa-icon [icon]="icons.login"></fa-icon>
         </a>
 
-        <!-- TODO: verify authorization | role -->
-        <a *ngIf="userLogged" class="circle" routerLink="/admin">
+        <a *ngIf="userLogged && isUserAdmin" class="circle" routerLink="/admin">
             <fa-icon [icon]="icons.admin"></fa-icon>
         </a>
 

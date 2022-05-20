@@ -15,6 +15,7 @@ import { User } from './shared/models/user';
 export class AppComponent {
   footerSections: FooterSection[] = footerSections;
   isUserLogged = false;
+  isUserAdmin = false;
 
   constructor(
     private authService: AuthService,
@@ -36,6 +37,7 @@ export class AppComponent {
   private checkUser(user?: User): void {
     if ( user ) {
       this.isUserLogged = true;
+      this.isUserAdmin = this.sessionService.isUserAdmin();
     } else if ( this.authService.isLoggedIn() ) {
       this.authService.getUserByToken().subscribe(() => {}, 
         error => {

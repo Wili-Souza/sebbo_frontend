@@ -22,4 +22,8 @@ export class SessionService {
   getCurrentUser(): User | undefined {
     return this.user.value;
   }
+
+  isUserAdmin(): boolean {
+    return this.user.value?.role === "admin";
+  }
 }

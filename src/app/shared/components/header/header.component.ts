@@ -8,6 +8,7 @@ import { faUserTie, faShoppingCart, faUser, faSignOutAlt, faLongArrowAltRight, f
 })
 export class HeaderComponent implements OnInit {
   @Input() userLogged = false;
+  @Input() isUserAdmin = false;
   @Output() logout = new EventEmitter<void>();
 
   icons = {

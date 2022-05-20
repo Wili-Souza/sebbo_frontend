@@ -62,12 +62,4 @@ export class AdminComponent implements OnInit {
       );
     }
   }
-
-  // buyItem(item: Item) {
-  //   if ( item.stock === 0 ) {
-  //     alert("Item fora de estoque");
-  //   } else {
-  //     this.router.navigate(['cart'], { state: { item: item } });
-  //   }
-  // }
 }
