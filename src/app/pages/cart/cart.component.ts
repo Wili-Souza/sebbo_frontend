@@ -18,7 +18,7 @@ const mockCoverUrl = "https://ludis.com.br/wp-content/uploads/2020/05/book-img2.
 //   {
 //     quantity: 2,
 //     book: {
-//       imageUrl: mockCoverUrl,
+//       image: mockCoverUrl,
 //       name: "Livro 1",
 //       price: 20.50,
 //       id: "id123",
@@ -30,7 +30,7 @@ const mockCoverUrl = "https://ludis.com.br/wp-content/uploads/2020/05/book-img2.
 //   {
 //     quantity: 1,
 //     book: {
-//       imageUrl: mockCoverUrl,
+//       image: mockCoverUrl,
 //       name: "Livro 2",
 //       price: 10.50,
 //       id: "id123",
@@ -126,7 +126,7 @@ export class CartComponent implements OnInit {
           ...item,
           book: {
             ...item.book,
-            imageUrl: mockCoverUrl
+            image: mockCoverUrl
           }
         }
       });

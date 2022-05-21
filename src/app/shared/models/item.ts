@@ -1,5 +1,7 @@
+import { Form } from "@angular/forms";
+
 export interface Item {
-    imageUrl: string;
+    image: string | File;
     name: string;
     price: number;
     id?: string;

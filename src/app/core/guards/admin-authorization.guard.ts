@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { SessionService } from '../services/session.service';
 
@@ -9,6 +9,7 @@ import { SessionService } from '../services/session.service';
 export class AdminAuthorizationGuard implements CanActivate {
 
   constructor(
+    private router: Router,
     private sessionService: SessionService
   ) {}
 
@@ -21,7 +22,7 @@ export class AdminAuthorizationGuard implements CanActivate {
       return true;
     } 
 
+    this.router.navigate(["/home"]);
     return false;
   }
-  
 }

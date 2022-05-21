@@ -5,7 +5,11 @@
             (click)="close()">
         </fa-icon>
         <h2>Informações do Livro</h2>
-        <form [formGroup]="bookForm" (ngSubmit)="onSubmit()" class="form">
+        <form enctype='multipart/form-data' [formGroup]="bookForm" (ngSubmit)="onSubmit()" class="form">
+            <input (change)="onFileChange($event)" id="image" type="file" style="display: none;">
+            <label class="btn btn-dark input-file-btn" for="image">
+                {{ coverFileName || "Escolher capa" }}
+            </label>
             <mat-form-field class="my-form-field" appearance="outline">
                 <mat-label>Nome</mat-label>
                 <input formControlName="name" matInput placeholder="Nome do livro">

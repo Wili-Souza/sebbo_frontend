@@ -20,30 +20,22 @@ export class BookService {
   ) { }
 
   getAll(): Observable<Item[]> {
-    return this.http.get<Item[]>(this.URL).pipe(
-      map(items => items.map(item => ({ ...item, imageUrl: mockCoverUrl })))
-    );
+    return this.http.get<Item[]>(this.URL);
   }
 
   getById(id: string): Observable<Item> {
     const getBookUrl = this.URL + id;
-    return this.http.get<Item>(getBookUrl).pipe(
-      map(item => ({ ...item, imageUrl: mockCoverUrl }))
-    );
+    return this.http.get<Item>(getBookUrl);
   }
 
-  update(id: string, book: Item): Observable<Item>  {
+  update(id: string, bookFormData: FormData): Observable<Item>  {
     const putBookUrl = this.URL + id;
-    return this.http.put<Item>(putBookUrl, book).pipe(
-      map(item => ({ ...item, imageUrl: mockCoverUrl }))
-    );
+    return this.http.put<Item>(putBookUrl, bookFormData);
   }
 
-  create(book: Item): Observable<Item>  {
+  create(bookFormData: FormData): Observable<Item>  {
     const postBookUrl = this.URL;
-    return this.http.post<Item>(postBookUrl, book).pipe(
-      map(item => ({ ...item, imageUrl: mockCoverUrl }))
-    );
+    return this.http.post<Item>(postBookUrl, bookFormData);
   }
 
   delete(id: string): Observable<Item>  {
