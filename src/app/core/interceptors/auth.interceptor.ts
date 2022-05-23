@@ -6,13 +6,19 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { LoaderService } from '../services/loader.service';
+import { finalize } from 'rxjs/operators';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor() {}
+  constructor(
+    private loaderService: LoaderService
+  ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    this.loaderService.start();
+
     const jwtToken = localStorage.getItem("jwt_token");
     
     if ( jwtToken ) {
@@ -22,9 +28,9 @@ export class AuthInterceptor implements HttpInterceptor {
         )
       })
 
-      return next.handle(reqCloned);
+      return next.handle(reqCloned).pipe( finalize( () => {this.loaderService.stop()} ));
     }
 
-    return next.handle(request);
+    return next.handle(request).pipe( finalize( () => this.loaderService.stop() ));
   }
 }

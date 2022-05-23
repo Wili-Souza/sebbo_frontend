@@ -21,6 +21,8 @@ export class MessagesService {
       this.success("Operação bem sucedida!");
     } else if ( status === 403 ) {
       this.error("Autorização negada.");
+    } else if ( status === 409 ) {
+      this.error("Quantidade máxima atingida, não há mais em estoque.");
     } else if ( status === 422 ) {
       this.error("Email ou senha incorretos.");
     } else if ( status === 500 ) {

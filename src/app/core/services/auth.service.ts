@@ -22,14 +22,16 @@ export class AuthService {
     const loginUrl = this.URL + "login";
     const body = { email, password }
     return this.http.post<AuthResponse>(loginUrl, body).pipe(
-      tap(res => this.setSession(res))
+      tap(res => this.setSession(res)),
+      tap(res => console.log(res))
     );
   }
 
   register(user: User): Observable<AuthResponse> {
     const loginUrl = this.URL + "register";
     return this.http.post<AuthResponse>(loginUrl, user).pipe(
-      tap(res => this.setSession(res))
+      tap(res => this.setSession(res)),
+      tap(res => console.log(res))
     );
   }
 
@@ -37,13 +39,9 @@ export class AuthService {
     const loginUrl = this.URL + "data";
     const jwtToken = localStorage.getItem('jwt_token');
     return this.http.post<User>(loginUrl, { jwtToken }).pipe(
-      tap(user => this.sessionService.setUser(user))
+      tap(user => this.sessionService.setUser(user)),
+      tap(res => console.log(res))
     );
-  }
-
-  getByToken(jwtToken: string): Observable<User> {
-    const loginUrl = this.URL;
-    return this.http.get<User>(loginUrl);
   }
 
   logout() {

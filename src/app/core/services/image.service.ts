@@ -14,19 +14,12 @@ export class ImageService {
     return this.httpClient
       .get(imageUrl, { responseType: 'blob' })
       .pipe( 
-        map(blob => this.blobToFile(blob, imageUrl) as File),
-        // map(file => this.fileToFormData(file) as FormData),
+        map(blob => this.blobToFile(blob, imageUrl) as File)
       )
   }
 
   private blobToFile(blob: Blob, imageUrl: string): File {
-    const fileName = imageUrl.split("/").pop() || "imagem_capa";
+    const fileName = imageUrl.split("?")[0].split("/").pop() || "imagem_capa";
     return new File([blob], fileName);
   }
-
-  // private fileToFormData(file: File): FormData {
-  //   const formData = new FormData();
-  //   formData.append("image", file);
-  //   return formData;
-  // }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { BookService } from 'src/app/core/services/book.service';
 import { Item } from 'src/app/shared/models/item';
@@ -20,14 +20,20 @@ export class AdminComponent implements OnInit {
   constructor(
     private router: Router,
     private bookService: BookService,
+    private activatedRoute: ActivatedRoute
   ) { 
     this.fetchWhenLoaded();
   }
 
   private fetchWhenLoaded() {
     this.router.events.subscribe((val) => {
-      if ( val instanceof NavigationEnd && val.url === "/admin") {
-        this.fetchData();
+      if ( val instanceof NavigationEnd && val.url.includes("/admin")) {
+        this.activatedRoute.queryParamMap.subscribe( queryParams => {
+          const reload = queryParams.get("reload");
+          if ( reload !== "false" ) {
+            this.fetchData();
+          }
+        })
       }
     })
   }

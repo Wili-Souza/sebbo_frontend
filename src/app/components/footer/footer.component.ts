@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { faAddressCard, faEnvelope, faEnvelopeOpen, faEnvelopeOpenText, faInfo, faLocationArrow, faMailBulk, faMap, faMapMarked, faMapMarker, faMapMarkerAlt, faPen, faPencilAlt, faPhone, faPhoneAlt, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { FooterSection } from '../../models/footer-section';
+import { faAddressCard, faEnvelope, faMapMarkerAlt, faPhoneAlt, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { FooterSection } from 'src/app/shared/models/footer-section';
+
 
 
 @Component({

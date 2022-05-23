@@ -13,34 +13,6 @@ import { faMinus, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Subject } from 'rxjs';
 import { finalize, first, tap } from 'rxjs/operators';
 
-const mockCoverUrl = "https://ludis.com.br/wp-content/uploads/2020/05/book-img2.jpg";
-// const productsMock = [
-//   {
-//     quantity: 2,
-//     book: {
-//       image: mockCoverUrl,
-//       name: "Livro 1",
-//       price: 20.50,
-//       id: "id123",
-//       sinopse: "Um livro legal para a galerinha",
-//       author: "João",
-//       stock: 4,
-//     }
-//   },
-//   {
-//     quantity: 1,
-//     book: {
-//       image: mockCoverUrl,
-//       name: "Livro 2",
-//       price: 10.50,
-//       id: "id123",
-//       sinopse: "Um livro legal para a galerinha",
-//       author: "João",
-//       stock: 3,
-//     }
-//   }
-// ];
-
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -108,7 +80,7 @@ export class CartComponent implements OnInit {
       .subscribe( 
         purchase => {
           this.purchase = purchase || undefined;
-          this.products = this.mapProducts(purchase);
+          this.products = purchase.items;
         }, 
         error => {
           if ( error.status === 404 && this.userId) {
@@ -117,21 +89,6 @@ export class CartComponent implements OnInit {
         }
       );
     }
-  }
-
-  private mapProducts(purchase: Purchase) {
-    if ( purchase ) {
-      return this.products = purchase.items.map( item => {
-        return {
-          ...item,
-          book: {
-            ...item.book,
-            image: mockCoverUrl
-          }
-        }
-      });
-    }
-    return undefined;
   }
 
   createPurchase(userId: string) {

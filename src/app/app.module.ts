@@ -1,24 +1,31 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { registerLocaleData } from '@angular/common';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import localePt from '@angular/common/locales/pt';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
-
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
-import localePt from '@angular/common/locales/pt';
-import { registerLocaleData } from '@angular/common';
 import { CoreModule } from './core/core.module';
+import { LoaderComponent } from './components/loader/loader.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
 
 registerLocaleData(localePt, "pt-BR");
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoaderComponent,
+    FooterComponent,
+    HeaderComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +35,7 @@ registerLocaleData(localePt, "pt-BR");
     CoreModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {

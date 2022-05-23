@@ -3,8 +3,10 @@ import { Form, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Subject } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { BookService } from 'src/app/core/services/book.service';
 import { ImageService } from 'src/app/core/services/image.service';
+import { LoaderService } from 'src/app/core/services/loader.service';
 import { MessagesService } from 'src/app/core/services/messages.service';
 import { Item } from '../../../../shared/models/item';
 
@@ -36,7 +38,8 @@ export class BookModalComponent implements OnInit {
     private bookService: BookService,
     private fb: FormBuilder,
     private messageServices: MessagesService,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private loaderService: LoaderService
   ) { }
 
   ngOnInit(): void {
@@ -50,34 +53,38 @@ export class BookModalComponent implements OnInit {
   }
 
   fetchBook(id: string) {
-    this.bookService.getById(id).subscribe( book => {;
-      this.imageService.getFileFromUrl(book.image as string).subscribe(
+    this.loaderService.start();
+    this.bookService.getById(id).subscribe( book => {
+      this.imageService.getFileFromUrl(book.image as string)
+      .pipe(finalize(() => this.loaderService.stop()))
+      .subscribe(
         (bookForm) => {
           this.book = {
             ...book,
             image: bookForm as File
           };
           this.coverFileName = (this.book.image as File).name;
-          this.bookForm.patchValue(this.book)
+          this.bookForm.patchValue(this.book);
         }
       );
     });
   }
 
-  close() {
-    this.router.navigate(["/admin"]);
+  onClose(){
+    this.close({ reload: false });
+  }
+
+  close(queryParams: { reload?: boolean } = { reload: true }) {
+    this.router.navigate(["/admin"], { queryParams });
   }
 
   onFileChange(event: any) {
-    // const formData = new FormData();
     const file: File = event.target.files[0] as File;
-    // formData.append('image', file);
     this.coverFileName = file.name;
     this.bookForm.controls.image.setValue(file);
   }
 
   onSubmit() {
-    // const book = this.bookForm.value as Item;
     const formData = new FormData();
     Object.keys(this.bookForm.value).forEach( key => {
       formData.append(key, this.bookForm.value[key])

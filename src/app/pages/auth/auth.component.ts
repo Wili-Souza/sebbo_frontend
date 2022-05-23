@@ -38,7 +38,6 @@ export class AuthComponent implements OnInit {
   login(): void {
     if ( this.loginForm.valid ) {
       if (this.showErrorMessages) this.showErrorMessages = false;
-      // TODO: integrate with login route
       const data = this.loginForm.value;
       console.log(data);
     } else {
@@ -49,7 +48,6 @@ export class AuthComponent implements OnInit {
   register(): void {
     if ( this.registerForm.valid ) {
       if (this.showErrorMessages) this.showErrorMessages = false;
-      // TODO: integrate with login route
       const data = this.registerForm.value;
       console.log(data);
     } else {

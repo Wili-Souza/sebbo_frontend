@@ -18,6 +18,7 @@ export class AdminAuthorizationGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     const isAdmin = this.sessionService.isUserAdmin();
+    
     if ( isAdmin ) {
       return true;
     } 

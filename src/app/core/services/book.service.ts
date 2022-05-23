@@ -1,13 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 import { Item } from 'src/app/shared/models/item';
 
 
-const mockCoverUrl = "https://ludis.com.br/wp-content/uploads/2020/05/book-img2.jpg";
+// const mockCoverUrl = "https://ludis.com.br/wp-content/uploads/2020/05/book-img2.jpg";
 
 @Injectable({
   providedIn: 'root'

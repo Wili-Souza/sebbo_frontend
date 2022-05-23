@@ -2,7 +2,7 @@
     <div class="modal">
         <fa-icon class="icon-close" 
             [icon]="icons.close"
-            (click)="close()">
+            (click)="onClose()">
         </fa-icon>
         <h2>Informações do Livro</h2>
         <form enctype='multipart/form-data' [formGroup]="bookForm" (ngSubmit)="onSubmit()" class="form">
